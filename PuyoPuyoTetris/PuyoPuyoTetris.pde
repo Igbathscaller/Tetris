@@ -23,6 +23,9 @@ void draw() {
   //if(!ongoing){
   //  initialize();
   //}
+  if(ongoing){
+    game.go();
+  }
   //textSize(20);
   //text("FPS: "+frameRate,0,20);
 }
