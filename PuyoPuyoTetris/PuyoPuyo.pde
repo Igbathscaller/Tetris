@@ -21,7 +21,7 @@ public class PuyoPuyo implements Type{
   public void click(){
   }
   
-  public void keypress(char c){
+  public void keypress(int c){
   }
 
 }

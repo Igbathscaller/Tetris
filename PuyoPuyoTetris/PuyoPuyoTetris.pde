@@ -50,6 +50,7 @@ void mousePressed() {
    
 void keyPressed() {
     if(ongoing){
-      game.keypress(key);
+      game.keypress(keyCode);
     }
+    System.out.println(keyCode);
   }
