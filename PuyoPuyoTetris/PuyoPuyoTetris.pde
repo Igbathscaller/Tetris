@@ -3,11 +3,11 @@ Type game;
 
 void setup(){  
   size(600,800);
+  background(255);
   initialize();
 }
 
 void initialize(){
-  background(255);
   stroke(0);
   noFill();
   rect(100,300,105,40);
@@ -19,11 +19,12 @@ void initialize(){
 }
 
 void draw() {
-  if(!ongoing){
-    initialize();
-  }
-  textSize(20);
-  text("FPS: "+frameRate,0,20);
+  //background(255);
+  //if(!ongoing){
+  //  initialize();
+  //}
+  //textSize(20);
+  //text("FPS: "+frameRate,0,20);
 }
 
 

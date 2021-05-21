@@ -6,7 +6,8 @@ public class PuyoPuyo implements Type{
   }
   
   public void initialize(){
-    
+    fill(140,140,140);
+    rect(0,0,width,height);
   }
   
   public void click(){
