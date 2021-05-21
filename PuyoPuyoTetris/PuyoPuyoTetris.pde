@@ -2,7 +2,7 @@ boolean ongoing = false;
 Type game;
 
 void setup(){  
-  size(600,800);
+  size(800,800);
   background(255);
   initialize();
 }
@@ -43,8 +43,10 @@ void mousePressed() {
       }
       
    }
-   
-   //Read about mouseClicked()/mousePressed() and related methods in the documentation.
-   //Right click: add a cow at the mouse location.
-   //Left click: call the click of each cow 
 }
+   
+void keyPressed() {
+    if(ongoing){
+      game.keypress(key);
+    }
+  }
