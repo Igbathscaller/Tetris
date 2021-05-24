@@ -15,19 +15,6 @@ public class Tetris implements Type{
 
   private PImage[] blocks = new PImage[8];
   
-  //This is the external parts of a piece in default state 
-  // *     all pieces have 0,0 so it is not marked.
-  // *X* is the j piece. 
-  private int[] placements =       { 0,0, 0,0,  0,0, //nothing
-                                    -1,0, 1,0,  2,0, //I
-                                    -1,0, 1,0, -1,1, //J
-                                    -1,0, 1,0,  1,1, //L
-                                    -1,0, 0,1,  1,1, //S
-                                     1,0, 0,1, -1,1, //Z
-                                     1,0, 0,1,  1,1, //O
-                                    -1,0, 0,1,  1,0  //T
-                                    };
-  
   //intialize list so we can use collections.shuffle.
   //this will be order of the pieces, hence the name
   private List<Integer> order = Arrays.asList(arr);
@@ -67,6 +54,7 @@ public class Tetris implements Type{
         
         image(blocks[k], x*30+250, y*30+50);
         
+        
         /*
         fill(colors[2*k],colors[2*k+1], 120);
         rect(x*30+250, y*30+50, 30, 30);
@@ -79,6 +67,8 @@ public class Tetris implements Type{
           rect(x*30+256, y*30+56, 18, 18);
         }
         */
+        
+        
   }
   
   public void go(){

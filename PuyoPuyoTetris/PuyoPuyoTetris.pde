@@ -52,5 +52,11 @@ void keyPressed() {
     if(ongoing){
       game.keypress(keyCode);
     }
+    if(ongoing && keyCode == 8){
+      ongoing = false;
+      game = null;
+      background(255);
+      initialize();
+    }
     System.out.println(keyCode);
   }
