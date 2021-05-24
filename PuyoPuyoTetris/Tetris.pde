@@ -13,6 +13,8 @@ public class Tetris implements Type{
   private Piece piece;
   
   private PImage[] blocks = new PImage[8];
+  
+  private PImage[] previews = new PImage[8];
       
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
   private int time = 0;
@@ -25,13 +27,23 @@ public class Tetris implements Type{
   
   public void initialize(){
     background(255);
-    fill(140,140,140);
+    fill(#2de0da);
     rect(150,80,100,100);
+    stroke(#2de0da);
+    strokeWeight(4);
+    fill(0);
+    rect(552,50,110,300);
+    strokeWeight(1);
+    noStroke();
     fill(255);
     rect(250,50,300,600);
     
     for(int i = 0; i<8;i++){
       blocks[i] =  loadImage(i + ".png");
+    }
+    
+    for(int i = 1; i<8;i++){
+      previews[i] = loadImage("Preview" + i + ".jpg");
     }
     
     queue = new Queue();
@@ -53,6 +65,10 @@ public class Tetris implements Type{
        for(int j = 0; j<20; j++){
          block(i,j);
        }
+     }
+     for(int i = 0; i<5; i++){
+       int k = queue.getPiece(i);
+       image(previews[k], 570, 70+55*i);
      }
   }
   
