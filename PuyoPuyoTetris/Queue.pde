@@ -9,15 +9,36 @@ public class Queue{
   private int position = 0;
   
   
-  private Integer[] arr = {1,2,3,4,5,6,7}; //its just a sequential list that will be shuffled later
-  
   //intialize list so we can use collections.shuffle.
   //this will be order of the pieces, hence the name
+  private Integer[] arr = {1,2,3,4,5,6,7};
   private List<Integer> order = Arrays.asList(arr);
   
   public Queue(){
+    
+    //intialize queue
+    Collections.shuffle(order);
+    for(int i = 0; i<7; i++){
+      queue[i] = order.get(i);
+    }
+    //reshuffle order
     Collections.shuffle(order);
   }
-
+  
+  public int nextPiece(){
+    if (position == 7){
+      position = 0;
+      Collections.shuffle(order);
+    }
+    
+    int out = queue[position];
+    queue[position] = order.get(position++);
+    
+    return out;
+  }
+  
+  public int getPiece(int place){
+    return queue[(position + place) % 7];
+  }
   
 }

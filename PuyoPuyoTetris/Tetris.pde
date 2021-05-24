@@ -10,7 +10,7 @@ public class Tetris implements Type{
   
   private Queue queue;
   
-  private Piece piece; 
+  private Piece piece;
   
   private PImage[] blocks = new PImage[8];
       
@@ -33,6 +33,8 @@ public class Tetris implements Type{
     for(int i = 0; i<8;i++){
       blocks[i] =  loadImage(i + ".png");
     }
+    
+    queue = new Queue();
     
   }
   
@@ -61,6 +63,11 @@ public class Tetris implements Type{
   public void keypress(int c){
     
     if(c == 32){
+      for(int i = 0; i<7; i++){
+        System.out.print(queue.getPiece(i));
+      }
+      System.out.println();
+      System.out.println(queue.nextPiece());
       //spawn();
     }
     //37 left
