@@ -12,6 +12,8 @@ public class Tetris implements Type{
   //colors come in pairs. This is Hue and Saturation. Brightness is preset
   private int[] colors  = {0,0, 105,123, 167,97, 15,124, 238,132, 55,133, 32,136, 204,97}; 
 
+  private PImage[] blocks = new PImage[8];
+  
   //This is the external parts of a piece in default state 
   // *     all pieces have 0,0 so it is not marked.
   // *X* is the j piece. 
@@ -52,6 +54,10 @@ public class Tetris implements Type{
     fill(0);
     rect(250,50,300,600);
     
+    for(int i = 0; i<8;i++){
+      blocks[i] =  loadImage(i + ".png");
+    }
+    
     Collections.shuffle(order);
   }
   
@@ -75,6 +81,9 @@ public class Tetris implements Type{
   
   private void block(int x, int y){
         int k = board[x][y];
+        image(blocks[k], x*30+250, y*30+50);
+        
+        /*
         fill(colors[2*k],colors[2*k+1], 120);
         rect(x*30+250, y*30+50, 30, 30);
         if(k==0){
@@ -85,6 +94,7 @@ public class Tetris implements Type{
           fill(colors[2*k],colors[2*k+1], 150);
           rect(x*30+256, y*30+56, 18, 18);
         }
+        */
   }
   
   public void go(){
