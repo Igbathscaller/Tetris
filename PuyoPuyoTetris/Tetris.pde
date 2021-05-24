@@ -10,7 +10,8 @@ public class Tetris implements Type{
   private Integer[] arr = {1,2,3,4,5,6,7};         //its just a sequential list that will be shuffled later
   
   //colors come in pairs. This is Hue and Saturation. Brightness is preset
-  private int[] colors  = {0,0, 105,123, 167,97, 15,124, 238,132, 55,133, 32,136, 204,97}; 
+  //private int[] colors  = {0,0, 105,123, 167,97, 15,124, 238,132, 55,133, 32,136, 204,97}; 
+  //not useful, we will be using PNGS
 
   private PImage[] blocks = new PImage[8];
   
@@ -115,6 +116,11 @@ public class Tetris implements Type{
     if(c == 32){
       spawn();
     }
+    //37 left
+    //38 up
+    //39 right
+    //40 down
+    
   }
   
   
