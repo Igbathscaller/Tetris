@@ -13,3 +13,4 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 5/24/2021
 - Removed old colors and used pictures instead
 - Created a new class for the tentative piece
+- Created a new class for the Queue of next pieces.
