@@ -51,7 +51,7 @@ public class Tetris implements Type{
     background(255);
     fill(140,140,140);
     rect(150,80,100,100);
-    fill(0);
+    fill(255);
     rect(250,50,300,600);
     
     for(int i = 0; i<8;i++){
@@ -81,6 +81,7 @@ public class Tetris implements Type{
   
   private void block(int x, int y){
         int k = board[x][y];
+        
         image(blocks[k], x*30+250, y*30+50);
         
         /*
