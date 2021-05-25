@@ -26,8 +26,13 @@ void draw() {
   if(ongoing){
     game.go();
   }
-  //textSize(20);
-  //text("FPS: "+frameRate,0,20);
+  
+  noStroke();
+  fill(255);
+  rect(0,0,200,20);
+  fill(0);
+  textSize(20);
+  text("FPS: "+frameRate,0,20);
 }
 
 

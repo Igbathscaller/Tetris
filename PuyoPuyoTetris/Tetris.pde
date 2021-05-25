@@ -11,6 +11,7 @@ public class Tetris implements Type{
   private Queue queue;
   
   private Piece piece;
+  private int[] coords;
   
   private PImage[] blocks = new PImage[8];
   
@@ -47,6 +48,7 @@ public class Tetris implements Type{
     }
     
     queue = new Queue();
+    piece = new Piece(queue.nextPiece(),board);
     
   }
   
@@ -60,16 +62,37 @@ public class Tetris implements Type{
         
   }
   
+  private void block(int x, int y, int p){
+        
+        image(blocks[p], x*30+250, y*30+50);        
+        
+  }
+  
   public void go(){
+    
+     //renders board
      for(int i = 0; i<10; i++){
        for(int j = 0; j<20; j++){
          block(i,j);
        }
      }
+     
+     coords = piece.getPosition();
+     //renders tentative piece
+     for(int i = 0; i<4; i++){
+       block(coords[2*i], coords[2*i+1], piece.getPiece());
+     }
+       
+     
+     //insert code here
+     
+     
+     //renders preview
      for(int i = 0; i<5; i++){
        int k = queue.getPiece(i);
-       image(previews[k], 570, 70+55*i);
+       image(previews[k], 568, 70+55*i);
      }
+     
   }
   
   public void click(){
@@ -79,12 +102,13 @@ public class Tetris implements Type{
   public void keypress(int c){
     
     if(c == 32){
-      for(int i = 0; i<7; i++){
-        System.out.print(queue.getPiece(i));
-      }
-      System.out.println();
-      System.out.println(queue.nextPiece());
-      //spawn();
+      //spawns new piece and moves down queue
+      piece = new Piece(queue.nextPiece());
+      
+    }
+    
+    if(c == 40){
+      piece.moveDown();
     }
     //37 left
     //38 up
