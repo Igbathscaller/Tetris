@@ -18,4 +18,4 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 
 5/25/2021
 - Moving Pieces and Wall Checks are completed
-- Hold Box is updated.
+- Holding is complete. With Cooldown and Preview and good Box
