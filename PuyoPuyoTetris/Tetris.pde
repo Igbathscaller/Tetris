@@ -79,13 +79,13 @@ public class Tetris implements Type{
        }
      }
 
+     //ghost piece
+
      //renders tentative piece
      coords = piece.getPosition();
      for(int i = 0; i<4; i++){
        block(coords[2*i], coords[2*i+1], piece.getPiece());
      }
-       
-     //ghost piece
      
      //Hold piece
      if(hold>0){
@@ -110,7 +110,7 @@ public class Tetris implements Type{
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
       canHold = true;
-      
+    
     }
     
     if(c == 67 && canHold){//C or hold
