@@ -36,7 +36,7 @@ public class Piece{
       return piece;
     }
     
-    private void setPosition(int x, int y){
+    public void setPosition(int x, int y){
       
       boolean swap = true;
       
@@ -48,7 +48,7 @@ public class Piece{
         check[i+2] = check[0]+ placements[6*piece + i];    //x
         check[i+3] = check[1]+ placements[6*piece + i +1]; //y
         
-        swap = (check[i+2] >= 0 && check[i+2] < 20 && check[i+3] <20 && //check its on the board
+        swap = (check[i+2] >= 0 && check[i+2] < 10 && check[i+3] <20 && //check its on the board
                 board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
                 
       }
@@ -69,30 +69,5 @@ public class Piece{
       return positions;
     
     }
-    
-    public void moveDown(){
-      setPosition(0,1);
-    
-    }
-    
-
-    
-    /*private void spawn(){
-    if(position >= 7){
-    position = 0;
-    Collections.shuffle(order);
-    }
-    int k = 6 * order.get(position);
-    
-    board[4][1] = order.get(position);
-    
-    for(int i = k; i<k+6; i+=2){
-    board[ 4+placements[i] ][ 1-placements[i+1] ] = order.get(position);
-    }
-    
-    position++;
-    
-    }
-    */
      
 }

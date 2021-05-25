@@ -101,19 +101,25 @@ public class Tetris implements Type{
   
   public void keypress(int c){
     
-    if(c == 32){
+    if(c == 32){//space
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
       
     }
     
-    if(c == 40){
-      piece.moveDown();
+    if(c == 37){//left
+      piece.setPosition(-1,0);
     }
-    //37 left
+    
+    if(c == 39){//right
+      piece.setPosition(1,0);
+    }
+    
+    if(c == 40){//down
+      piece.setPosition(0,1);
+    }
+  
     //38 up
-    //39 right
-    //40 down
     
   }
   
