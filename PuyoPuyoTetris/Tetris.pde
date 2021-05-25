@@ -87,7 +87,9 @@ public class Tetris implements Type{
      //ghost piece
      
      //Hold piece
-     
+     if(hold>0){
+       image(previews[hold],158,105);
+     }
      
      //renders preview
      for(int i = 0; i<5; i++){
@@ -107,6 +109,17 @@ public class Tetris implements Type{
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
       
+    }
+    
+    if(c == 67){//C or hold
+      int temp = hold;
+      hold = piece.getPiece();
+      if (temp == 0){  
+        piece = new Piece(queue.nextPiece(),board);
+      }
+      else{
+        piece = new Piece(temp,board);
+      }
     }
     
     if(c == 37){//left
