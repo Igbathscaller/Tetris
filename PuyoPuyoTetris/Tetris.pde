@@ -14,6 +14,7 @@ public class Tetris implements Type{
   private int[] coords;
   
   private int hold = 0;
+  private boolean canHold = true;
   
   private PImage[] blocks = new PImage[8];
   
@@ -108,10 +109,11 @@ public class Tetris implements Type{
     if(c == 32){//space
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
+      canHold = true;
       
     }
     
-    if(c == 67){//C or hold
+    if(c == 67 && canHold){//C or hold
       int temp = hold;
       hold = piece.getPiece();
       if (temp == 0){  
@@ -120,6 +122,7 @@ public class Tetris implements Type{
       else{
         piece = new Piece(temp,board);
       }
+      canHold = false;
     }
     
     if(c == 37){//left
