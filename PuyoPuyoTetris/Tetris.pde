@@ -89,7 +89,11 @@ public class Tetris implements Type{
      
      //Hold piece
      if(hold>0){
+       if(!canHold){
+         tint(120);//greys out hold piece
+       }
        image(previews[hold],158,105);
+       noTint();
      }
      
      //renders preview
@@ -140,25 +144,5 @@ public class Tetris implements Type{
     //38 up
     
   }
-  
-  //old and probably useless code
-  
-  //colors come in pairs. This is Hue and Saturation. Brightness is preset
-  //private int[] colors  = {0,0, 105,123, 167,97, 15,124, 238,132, 55,133, 32,136, 204,97}; 
-  //not useful, we will be using PNGS
-  
-  /*
-  fill(colors[2*k],colors[2*k+1], 120);
-  rect(x*30+250, y*30+50, 30, 30);
-  if(k==0){
-    fill(0,0, 150);
-    rect(x*30+253, y*30+53, 24, 24);
-  }
-  else{
-    fill(colors[2*k],colors[2*k+1], 150);
-    rect(x*30+256, y*30+56, 18, 18);
-  }
-  */
-
 
 }
