@@ -103,7 +103,7 @@ public class Tetris implements Type{
     
     if(c == 32){
       //spawns new piece and moves down queue
-      piece = new Piece(queue.nextPiece());
+      piece = new Piece(queue.nextPiece(),board);
       
     }
     

@@ -25,9 +25,10 @@ public class Piece{
     
     public Piece(int p, int[][]board){
       
+      this.board = board;  //initialize board;
+
       piece = p;
       setPosition(0,0);
-      this.board = board;
       
     }
     
@@ -39,16 +40,27 @@ public class Piece{
       
       boolean swap = true;
       
-      check[0] = px;
-      check[1] = py;
+      check[0] = px + x;
+      check[1] = py + y;
+      
       for(int i = 0; i<6 && swap; i+=2){
         
-        positions[i+2] = positions[0]+ placements[6*piece + i];    //x
-        positions[i+3] = positions[1]+ placements[6*piece + i +1]; //y
+        check[i+2] = check[0]+ placements[6*piece + i];    //x
+        check[i+3] = check[1]+ placements[6*piece + i +1]; //y
         
-        
+        swap = (check[i+2] >= 0 && check[i+2] < 20 && check[i+3] <20 && //check its on the board
+                board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
+                
       }
       
+      if (swap){
+        int[]temp = positions;  //makes position from check
+        positions = check;      //and gives check a garbage array
+        check = temp;
+        
+        px+=x;                  //set new px
+        py+=y;                  //new py
+    }      
       
     }
     
