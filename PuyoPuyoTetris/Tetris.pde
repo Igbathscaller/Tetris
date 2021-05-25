@@ -13,6 +13,8 @@ public class Tetris implements Type{
   private Piece piece;
   private int[] coords;
   
+  private int hold = 0;
+  
   private PImage[] blocks = new PImage[8];
   
   private PImage[] previews = new PImage[8];
@@ -28,12 +30,11 @@ public class Tetris implements Type{
   
   public void initialize(){
     background(255);
-    fill(#2de0da);
-    rect(150,80,100,100);
     stroke(#2de0da);
     strokeWeight(4);
     fill(0);
     rect(552,50,110,300);
+    rect(147,80,100,100);
     strokeWeight(1);
     noStroke();
     fill(255);
@@ -76,15 +77,16 @@ public class Tetris implements Type{
          block(i,j);
        }
      }
-     
-     coords = piece.getPosition();
+
      //renders tentative piece
+     coords = piece.getPosition();
      for(int i = 0; i<4; i++){
        block(coords[2*i], coords[2*i+1], piece.getPiece());
      }
        
+     //ghost piece
      
-     //insert code here
+     //Hold piece
      
      
      //renders preview

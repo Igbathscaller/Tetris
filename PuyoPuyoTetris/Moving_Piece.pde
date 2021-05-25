@@ -5,6 +5,7 @@ public class Piece{
     private int piece;
     private int rotation = 0;
     
+    
     private int[] positions = new int[8]; //saves current position
     private int[] check = new int[8];     //saves the possible values
     private int[][] board;                //to check if current values are possible
@@ -60,7 +61,7 @@ public class Piece{
         
         px+=x;                  //set new px
         py+=y;                  //new py
-    }      
+      }      
       
     }
     
@@ -69,5 +70,8 @@ public class Piece{
       return positions;
     
     }
+    
+    
+    
      
 }
