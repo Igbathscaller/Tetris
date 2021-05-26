@@ -79,10 +79,10 @@ public class Tetris implements Type{
        }
      }
 
+      coords = piece.getPosition();
      //ghost piece
-
+     
      //renders tentative piece
-     coords = piece.getPosition();
      for(int i = 0; i<4; i++){
        block(coords[2*i], coords[2*i+1], piece.getPiece());
      }

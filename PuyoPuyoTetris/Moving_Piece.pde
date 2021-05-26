@@ -38,7 +38,19 @@ public class Piece{
     }
     
     public void setPosition(int x, int y){
+          
+      if (checkNext(x, y)){
+        int[]temp = positions;  //makes position from check
+        positions = check;      //and gives check a garbage array
+        check = temp;
+        
+        px+=x;                  //set new px
+        py+=y;                  //new py
+      }      
       
+    }
+    
+    public boolean checkNext(int x, int y) {
       boolean swap = true;
       
       check[0] = px + x;
@@ -53,16 +65,7 @@ public class Piece{
                 board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
                 
       }
-      
-      if (swap){
-        int[]temp = positions;  //makes position from check
-        positions = check;      //and gives check a garbage array
-        check = temp;
-        
-        px+=x;                  //set new px
-        py+=y;                  //new py
-      }      
-      
+      return swap;
     }
     
     public int[] getPosition(){
