@@ -19,3 +19,8 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 5/25/2021
 - Moving Pieces and Wall Checks are completed
 - Holding is complete. With Cooldown and Preview and good Box
+
+5/26/2021
+- Added Check Boolean Function
+- Added Hard Drop and first time we save pieces on board.
+- Moved Pictures into assets Folder
