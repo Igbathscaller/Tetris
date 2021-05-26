@@ -24,18 +24,28 @@ public class Piece{
                                     -1,0,  0,-1,  1, 0  //T
                                     };
     
-    public Piece(int p, int[][]board){
+   public Piece(int p, int[][]board){
       
       this.board = board;  //initialize board;
 
       piece = p;
-      setPosition(0,0);
+      positions[0] = px;
+      positions[1] = py;
+      for(int i = 0; i<6; i+=2){
+        positions[i+2] = positions[0]+ placements[6*piece + i];    //x
+        positions[i+3] = positions[1]+ placements[6*piece + i +1];
+      }
+      
+    }
+
+
       
     }
     
     public int getPiece(){
       return piece;
     }
+    
     
     public void setPosition(int x, int y){
           
@@ -46,7 +56,8 @@ public class Piece{
         
         px+=x;                  //set new px
         py+=y;                  //new py
-      }      
+      }
+      
       
     }
     
