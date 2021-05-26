@@ -45,23 +45,23 @@ public class Piece{
     
     public void setPosition(int x, int y){
           
-      if (checkNext(x, y)){
-        int[]temp = positions;  //makes position from check
-        positions = check;      //and gives check a garbage array
-        check = temp;
+     int[]temp = positions;  //makes position from check
+     positions = check;      //and gives check a garbage array
+     check = temp;
         
-        px+=x;                  //set new px
-        py+=y;                  //new py
-      }
+     px+=x;                  //set new px
+     py+=y;                  //new py
       
       
     }
     
     public boolean checkNext(int x, int y) {
-      boolean swap = true;
-      
+
       check[0] = px + x;
       check[1] = py + y;
+      
+      boolean swap = check[0] >= 0 && check[0] < 10 && check[1] <20 &&
+                     board[check[0]][check[1]]==0;      
       
       for(int i = 0; i<6 && swap; i+=2){
         

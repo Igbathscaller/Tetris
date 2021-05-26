@@ -142,15 +142,15 @@ public class Tetris implements Type{
       canHold = false;
     }
     
-    if(c == 37){//left
+    if(c == 37 && piece.checkNext(-1,0)){//left
       piece.setPosition(-1,0);
     }
     
-    if(c == 39){//right
+    if(c == 39 && piece.checkNext(1,0)){//right
       piece.setPosition(1,0);
     }
     
-    if(c == 40){//down
+    if(c == 40 && piece.checkNext(0,1)){//down
       piece.setPosition(0,1);
     }
   
