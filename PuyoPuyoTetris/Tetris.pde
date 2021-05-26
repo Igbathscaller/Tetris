@@ -42,11 +42,11 @@ public class Tetris implements Type{
     rect(250,50,300,600);
     
     for(int i = 0; i<8;i++){
-      blocks[i] =  loadImage(i + ".png");
+      blocks[i] =  loadImage("Assets/" + i + ".png");
     }
     
     for(int i = 1; i<8;i++){
-      previews[i] = loadImage("Preview" + i + ".jpg");
+      previews[i] = loadImage("Assets/Preview" + i + ".jpg");
     }
     
     queue = new Queue();
