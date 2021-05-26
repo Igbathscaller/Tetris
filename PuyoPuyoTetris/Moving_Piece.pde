@@ -38,10 +38,6 @@ public class Piece{
       
     }
 
-
-      
-    }
-    
     public int getPiece(){
       return piece;
     }
