@@ -24,3 +24,4 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 - Added Check Boolean Function
 - Added Hard Drop and first time we save pieces on board.
 - Moved Pictures into assets Folder
+- Added Simple Gravity. (might make it increase speed in future)
