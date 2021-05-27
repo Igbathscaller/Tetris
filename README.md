@@ -26,3 +26,4 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 - Moved Pictures into assets Folder
 - Added Simple Gravity. (might make it increase speed in future)
 - Blink Effect when something locks (accidental cool functionality due to order of code)
+- When Holding Down, Soft Drop occurs. It breaks when you click another button, so I guess it feels jank.
