@@ -23,6 +23,10 @@ public class Tetris implements Type{
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
   private int time = 0;
   private int speed = 100;
+  //checks if last key clicked is down.
+  private boolean softDrop = false; //Combined with keypressed checks if down is being held. 
+  
+  
   
   
   Tetris(){
@@ -94,6 +98,7 @@ public class Tetris implements Type{
          block(i,j);
        }
      }
+     
           
      //gravity
      if( time > 5040 ){
@@ -106,9 +111,13 @@ public class Tetris implements Type{
         setPiece();
        }
      }
+     else if(softDrop && keyPressed){//soft drop
+       time += speed*20;
+     }
      else{
        time += speed;
      }
+          
      
 
      //ghost piece
@@ -150,7 +159,7 @@ public class Tetris implements Type{
        piece.setPosition(0,1);
       }
       //saves piece on board
-      time = 5041;
+      time = 5040;
       //changed from set to create blink effect
 
     
@@ -166,19 +175,22 @@ public class Tetris implements Type{
         piece = new Piece(temp,board);
       }
       canHold = false;
+      softDrop = false;
     }
     
     if(c == 37 && piece.checkNext(-1,0)){//left
       piece.setPosition(-1,0);
+      softDrop = false;
     }
     
     if(c == 39 && piece.checkNext(1,0)){//right
       piece.setPosition(1,0);
+      softDrop = false;
     }
     
     if(c == 40 && piece.checkNext(0,1)){//down
-      piece.setPosition(0,1);
-      time = 0;
+      //piece.setPosition(0,1);
+      softDrop = true;
     }
   
     //38 up
