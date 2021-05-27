@@ -22,6 +22,7 @@ public class Tetris implements Type{
       
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
   private int time = 0;
+  private int delay = 51;
   
   
   Tetris(){
@@ -70,6 +71,21 @@ public class Tetris implements Type{
         
   }
   
+  //saves piece on board
+  private void setPiece(){
+      
+      coords = piece.getPosition();
+      //save piece
+      for(int i = 0; i<4; i++){
+        board[ coords[2*i] ][ coords[2*i+1] ] = piece.getPiece();
+      }
+      
+      //spawns new piece and moves down queue
+      piece = new Piece(queue.nextPiece(),board);
+      canHold = true;
+
+  }
+  
   public void go(){
     
      //renders board
@@ -78,11 +94,24 @@ public class Tetris implements Type{
          block(i,j);
        }
      }
-
-      coords = piece.getPosition();
-     //ghost piece
+          
+     //gravity
+     if( ++time > delay ){
+       time = 0;
+       if (piece.checkNext(0,1)){
+         piece.setPosition(0,1);
+       }
+       else{
+        //save piece
+        setPiece();
+       }
+     }
      
+
+     //ghost piece
+
      //renders tentative piece
+     coords = piece.getPosition();
      for(int i = 0; i<4; i++){
        block(coords[2*i], coords[2*i+1], piece.getPiece());
      }
@@ -108,25 +137,17 @@ public class Tetris implements Type{
   
   }
   
+  
   public void keypress(int c){
     
     if(c == 32){//space
       
       //move piece down
       while(piece.checkNext(0,1)){
-        piece.setPosition(0,1);
+       piece.setPosition(0,1);
       }
-      
-      coords = piece.getPosition();
-      //save piece
-      for(int i = 0; i<4; i++){
-        board[ coords[2*i] ][ coords[2*i+1] ] = piece.getPiece();
-      }
-      
-      //spawns new piece and moves down queue
-      piece = new Piece(queue.nextPiece(),board);
-      canHold = true;
-      
+      //saves piece on board
+      setPiece();
     
     }
     
@@ -152,6 +173,7 @@ public class Tetris implements Type{
     
     if(c == 40 && piece.checkNext(0,1)){//down
       piece.setPosition(0,1);
+      time = 0;
     }
   
     //38 up
