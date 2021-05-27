@@ -22,7 +22,7 @@ public class Tetris implements Type{
       
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
   private int time = 0;
-  private int delay = 51;
+  private int speed = 100;
   
   
   Tetris(){
@@ -96,7 +96,7 @@ public class Tetris implements Type{
      }
           
      //gravity
-     if( ++time > delay ){
+     if( time > 5040 ){
        time = 0;
        if (piece.checkNext(0,1)){
          piece.setPosition(0,1);
@@ -105,6 +105,9 @@ public class Tetris implements Type{
         //save piece
         setPiece();
        }
+     }
+     else{
+       time += speed;
      }
      
 
@@ -147,7 +150,9 @@ public class Tetris implements Type{
        piece.setPosition(0,1);
       }
       //saves piece on board
-      setPiece();
+      time = 5041;
+      //changed from set to create blink effect
+
     
     }
     
