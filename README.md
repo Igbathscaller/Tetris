@@ -21,7 +21,7 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 - Holding is complete. With Cooldown and Preview and good Box
 
 5/26/2021
-- Added Check Boolean Function
+- Seperated movement function into a boolean wall and a move
 - Added Hard Drop and first time we save pieces on board.
 - Moved Pictures into assets Folder
 - Added Simple Gravity. (might make it increase speed in future)
