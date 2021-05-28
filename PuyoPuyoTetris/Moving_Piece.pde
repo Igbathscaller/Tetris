@@ -105,6 +105,14 @@ public class Piece{
       
     }
     
+    public void setRotate() {
+      
+    }
+    
+    public boolean checkRotate() {
+      return false;
+    }
+    
     
      
 }
