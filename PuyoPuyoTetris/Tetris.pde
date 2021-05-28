@@ -16,7 +16,8 @@ public class Tetris implements Type{
   private int hold = 0;
   private boolean canHold = true;
   
-  private PImage[] blocks = new PImage[8];
+  private PImage[] blocks = new PImage[8];//image of blocks
+  private int shadowPiece; //shadow piece only needs mark height 
   
   private PImage[] previews = new PImage[8];
       
@@ -86,6 +87,7 @@ public class Tetris implements Type{
       
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
+      shadowPiece = piece.shadowPiece(0,0);
       canHold = true;
 
   }
@@ -105,6 +107,7 @@ public class Tetris implements Type{
        time = 0;
        if (piece.checkNext(0,1)){
          piece.setPosition(0,1);
+         shadowPiece = piece.shadowPiece(0,1);
        }
        else{
         //save piece
@@ -121,6 +124,10 @@ public class Tetris implements Type{
      
 
      //ghost piece
+     coords = piece.getPosition();
+     for(int i = 0; i<4; i++){
+       block(coords[2*i], coords[2*i+1] + shadowPiece, piece.getPiece());
+     }
 
      //renders tentative piece
      coords = piece.getPosition();
@@ -157,11 +164,11 @@ public class Tetris implements Type{
       //move piece down
       while(piece.checkNext(0,1)){
        piece.setPosition(0,1);
+       piece.shadowPiece(0,1);
       }
       //saves piece on board
       time = 5040;
       //changed from set to create blink effect
-
     
     }
     
@@ -174,17 +181,20 @@ public class Tetris implements Type{
       else{
         piece = new Piece(temp,board);
       }
+      shadowPiece = piece.shadowPiece(0,0);
       canHold = false;
       softDrop = false;
     }
     
     if(c == 37 && piece.checkNext(-1,0)){//left
       piece.setPosition(-1,0);
+      shadowPiece = piece.shadowPiece(1,0);
       softDrop = false;
     }
     
     if(c == 39 && piece.checkNext(1,0)){//right
       piece.setPosition(1,0);
+      shadowPiece = piece.shadowPiece(1,0);
       softDrop = false;
     }
     

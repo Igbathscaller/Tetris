@@ -5,6 +5,7 @@ public class Piece{
     private int piece;
     private int rotation = 0;
     
+    private int shadowPiece = 0;
     
     private int[] positions = new int[8]; //saves current position
     private int[] check = new int[8];     //saves the possible values
@@ -29,11 +30,18 @@ public class Piece{
       this.board = board;  //initialize board;
 
       piece = p;
+      
+      //initialize positions
       positions[0] = px;
       positions[1] = py;
       for(int i = 0; i<6; i+=2){
-        positions[i+2] = positions[0]+ placements[6*piece + i];    //x
+        positions[i+2] = positions[0]+ placements[6*piece + i];    
         positions[i+3] = positions[1]+ placements[6*piece + i +1];
+      }
+      
+      //intialize shadow piece
+      while(checkNext(0, shadowPiece+1)){
+        ++shadowPiece;
       }
       
     }
@@ -81,6 +89,21 @@ public class Piece{
     
     }
     
+    //returns height from Shadow Piece
+    public int shadowPiece(int x, int y) {
+      if (x == 0){
+        shadowPiece -= y;
+      }
+      else{
+        shadowPiece = 0;
+        while(checkNext(0,shadowPiece+1)){
+          ++shadowPiece;
+        }
+      }
+      
+      return shadowPiece;
+      
+    }
     
     
      
