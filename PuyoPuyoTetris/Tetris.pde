@@ -57,6 +57,7 @@ public class Tetris implements Type{
     
     queue = new Queue();
     piece = new Piece(queue.nextPiece(),board);
+    shadowPiece = piece.shadowPiece(0,0);
     
   }
   
