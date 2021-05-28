@@ -160,6 +160,8 @@ public class Tetris implements Type{
   
   public void keypress(int c){
     
+    softDrop = false;
+
     if(c == 32){//space
       
       //move piece down
@@ -184,19 +186,16 @@ public class Tetris implements Type{
       }
       shadowPiece = piece.shadowPiece(0,0);
       canHold = false;
-      softDrop = false;
     }
     
     if(c == 37 && piece.checkNext(-1,0)){//left
       piece.setPosition(-1,0);
       shadowPiece = piece.shadowPiece(1,0);
-      softDrop = false;
     }
     
     if(c == 39 && piece.checkNext(1,0)){//right
       piece.setPosition(1,0);
       shadowPiece = piece.shadowPiece(1,0);
-      softDrop = false;
     }
     
     if(c == 40 && piece.checkNext(0,1)){//down
