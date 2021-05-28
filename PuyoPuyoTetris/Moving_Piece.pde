@@ -3,7 +3,7 @@ public class Piece{
     private int px = 4;
     private int py = 1;
     private int piece;
-    private int rotation = 0;
+    private int rotation =0;
     
     private int shadowPiece = 0;
     
@@ -15,39 +15,9 @@ public class Piece{
     //This is the external parts of a piece in default state 
     // *     all pieces have 0,0 so it is not marked.
     // *X* is the j piece. 
-    private int[] placements =     { 0,0,  0, 0,  0, 0, //nothing
-                                    -1,0,  1, 0,  2, 0, //I
-                                    -1,0,  1, 0, -1,-1, //J
-                                    -1,0,  1, 0,  1,-1, //L
-                                    -1,0,  0,-1,  1,-1, //S
-                                     1,0,  0,-1, -1,-1, //Z
-                                     1,0,  0,-1,  1,-1, //O
-                                    -1,0,  0,-1,  1, 0  //T
-                                    };
-    private int[] rotate1 = {0, 0,  0, 0,  0, 0, 
-                             0, 1,  0,-1,  0,-2,
-                             0, 1,  0,-1, -1, 1,
-                             0, 1,  0,-1, -1,-1,
-                            -1, 0,  0,-1,  1,-1,
-                             1, 0,  0,-1, -1,-1,
-                             1, 0,  0,-1,  1,-1,
-                            -1, 0,  0,-1,  1, 0};
-    private int[] rotate2 = {0, 0,  0, 0,  0, 0,
-                             1, 0, -1, 0, -2, 0,
-                             1, 0, -1, 0,  1, 1,
-                             1, 0, -1, 0, -1, 1,
-                            -1, 0,  0,-1,  1,-1,
-                             1, 0,  0,-1, -1,-1,
-                             1, 0,  0,-1,  1,-1,
-                            -1, 0,  0,-1,  1, 0};
-    private int[] rotate3 = {0, 0,  0, 0,  0, 0,
-                             0,-1,  0, 1,  0, 2,
-                             0,-1,  0, 1,  1,-1,
-                             0,-1,  0, 1,  1, 1,
-                            -1, 0,  0,-1,  1,-1,
-                             1, 0,  0,-1, -1,-1,
-                             1, 0,  0,-1,  1,-1,
-                            -1, 0,  0,-1,  1, 0};
+                                    
+   public int[][]placements = 
+   {Constants.rotate0,Constants.rotate1,Constants.rotate2,Constants.rotate3};
     
    public Piece(int p, int[][]board){
       
@@ -59,8 +29,8 @@ public class Piece{
       positions[0] = px;
       positions[1] = py;
       for(int i = 0; i<6; i+=2){
-        positions[i+2] = positions[0]+ placements[6*piece + i];    
-        positions[i+3] = positions[1]+ placements[6*piece + i +1];
+        positions[i+2] = positions[0]+ placements[rotation][6*piece + i];    
+        positions[i+3] = positions[1]+ placements[rotation][6*piece + i +1];
       }
       
       //intialize shadow piece
@@ -95,13 +65,13 @@ public class Piece{
       boolean swap = check[0] >= 0 && check[0] < 10 && check[1] <20 &&
                      board[check[0]][check[1]]==0;      
       
-      for(int i = 0; i<6 && swap; i+=2){
+      for(int i = 2; i<8 && swap; i+=2){
         
-        check[i+2] = check[0]+ placements[6*piece + i];    //x
-        check[i+3] = check[1]+ placements[6*piece + i +1]; //y
+        check[i]   = positions[i]+ x;    //x
+        check[i+1] = positions[i+1]+ y;  //y
         
-        swap = (check[i+2] >= 0 && check[i+2] < 10 && check[i+3] <20 && //check its on the board
-                board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
+        swap = (check[i] >= 0 && check[i] < 10 && check[i+1] <20 && //check its on the board
+                board[check[i]][check[i+1]]==0);  //check it doesn't overlap anything on board
                 
       }
       return swap;
@@ -129,12 +99,34 @@ public class Piece{
       
     }
     
+    
+    
+    
     public void setRotate() {
-      
+         int[]temp = positions;  //makes position from check
+         positions = check;      //and gives check a garbage array
+         check = temp;
+         
+         rotation = (rotation + 1) & 3;
     }
     
     public boolean checkRotate() {
-      return false;
+      check[0] = px;
+      check[1] = py;
+      
+      boolean swap = true;      
+      
+      for(int i = 0; i<6 && swap; i+=2){
+        
+        check[i+2] = px + placements[(rotation+1)&3][6*piece+i];    //x
+        check[i+3] = py + placements[(rotation+1)&3][6*piece+i+1];  //y
+        
+        swap = (check[i+2] >= 0 && check[i+2] < 10 && check[i+3]>=0 && check[i+3] <20 && //check its on the board
+                board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
+                
+      }
+      
+      return swap;
     }
     
     

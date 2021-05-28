@@ -198,12 +198,16 @@ public class Tetris implements Type{
       shadowPiece = piece.shadowPiece(1,0);
     }
     
+    if(c == 38 && piece.checkRotate()){
+      piece.setRotate();
+      shadowPiece = piece.shadowPiece(10,10);
+    }
+    
     if(c == 40 && piece.checkNext(0,1)){//down
       //piece.setPosition(0,1);
       softDrop = true;
     }
-  
-    //38 up
+
     
   }
 
