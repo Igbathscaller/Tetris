@@ -120,14 +120,14 @@ public class Tetris implements Type{
      else{
        time += speed;
      }
-          
-     
 
      //ghost piece
      coords = piece.getPosition();
+     tint(192,80);
      for(int i = 0; i<4; i++){
        block(coords[2*i], coords[2*i+1] + shadowPiece, piece.getPiece());
      }
+     noTint();
 
      //renders tentative piece
      coords = piece.getPosition();
@@ -164,7 +164,7 @@ public class Tetris implements Type{
       //move piece down
       while(piece.checkNext(0,1)){
        piece.setPosition(0,1);
-       piece.shadowPiece(0,1);
+       --shadowPiece;
       }
       //saves piece on board
       time = 5040;
