@@ -78,13 +78,40 @@ public class Tetris implements Type{
         
   }
   
-  //saves piece on board
+  //saves piece on board && and clears lines
   private void setPiece(){
       
       coords = piece.getPosition();
+      
       //save piece
       for(int i = 0; i<4; i++){
         board[ coords[2*i] ][ coords[2*i+1] ] = piece.getPiece();
+      }
+      
+      //clear lines
+      int linesCleared = 0;
+      int[] lines = { coords[0], coords[2], coords[4], coords[6] };//y values
+      Arrays.sort(lines);
+      
+      for(int i = 0; i<4; i++){
+        
+        if(i==0 || lines[i] != lines[i-1]){
+          boolean filled = true;
+          
+          for(int j = 0; j<10 && filled; j++){ //checks if line is filled.
+            filled = board[lines[i]][j] > 0;
+          }
+          
+          if(filled){//move lines down
+            for(int l = lines[i]; l>0; l--){
+              board[l] = board[l-1];
+            }
+            board[0] = new int[10];
+            linesCleared++;
+          }
+          
+        }
+        
       }
       
       //spawns new piece and moves down queue
