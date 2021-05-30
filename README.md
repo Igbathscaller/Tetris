@@ -35,3 +35,4 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 
 5/30/2021
 - Made the board into a col by row matrix. (THIS MIGHT CAUSE MANY BUGS. IF FOUND PLS REPORT!)
+- SRS is possibly complete. Might need more testing to verify.
