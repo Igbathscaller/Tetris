@@ -26,11 +26,11 @@ public class Piece{
       piece = p;
       
       //initialize positions
-      positions[0] = px;
-      positions[1] = py;
+      positions[1] = px;
+      positions[0] = py;
       for(int i = 0; i<6; i+=2){
-        positions[i+2] = positions[0]+ placements[rotation][6*piece + i];    
-        positions[i+3] = positions[1]+ placements[rotation][6*piece + i +1];
+        positions[i+2] = positions[0]+ placements[rotation][6*piece + i+1];    
+        positions[i+3] = positions[1]+ placements[rotation][6*piece + i];
       }
       
       //intialize shadow piece
@@ -59,18 +59,18 @@ public class Piece{
     
     public boolean checkNext(int x, int y) {
 
-      check[0] = px + x;
-      check[1] = py + y;
+      check[1] = px + x;
+      check[0] = py + y;
       
-      boolean swap = check[0] >= 0 && check[0] < 10 && check[1] <20 &&
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <20 &&
                      board[check[0]][check[1]]==0;      
       
       for(int i = 2; i<8 && swap; i+=2){
         
-        check[i]   = positions[i]+ x;    //x
-        check[i+1] = positions[i+1]+ y;  //y
+        check[i+1]   = positions[i+1]+ x;    //x
+        check[i]     = positions[i]  + y;    //y
         
-        swap = (check[i] >= 0 && check[i] < 10 && check[i+1] <20 && //check its on the board
+        swap = (check[i+1] >= 0 && check[i+1] < 10 && check[i] <20 && //check its on the board
                 board[check[i]][check[i+1]]==0);  //check it doesn't overlap anything on board
                 
       }
@@ -111,17 +111,17 @@ public class Piece{
     }
     
     public boolean checkRotate() {
-      check[0] = px;
-      check[1] = py;
+      check[1] = px;
+      check[0] = py;
       
       boolean swap = true;      
       
       for(int i = 0; i<6 && swap; i+=2){
         
-        check[i+2] = px + placements[(rotation+1)&3][6*piece+i];    //x
-        check[i+3] = py + placements[(rotation+1)&3][6*piece+i+1];  //y
+        check[i+3] = px + placements[(rotation+1)&3][6*piece+i]; //x
+        check[i+2] = py + placements[(rotation+1)&3][6*piece+i+1];   //y
         
-        swap = (check[i+2] >= 0 && check[i+2] < 10 && check[i+3]>=0 && check[i+3] <20 && //check its on the board
+        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2]>=0 && check[i+2] <20 && //check its on the board
                 board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
                 
       }

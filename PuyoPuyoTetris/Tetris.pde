@@ -6,7 +6,7 @@ public class Tetris implements Type{
   //we are going to name the following
   // 0:empty, 1:I, 2:J, 3:L, 4:S, 5:Z, 6:O, 7:T
   
-  private int[][] board = new int[10][20];         //saves the pieces on the board. in the future it will be 10 by 40
+  private int[][] board = new int[20][10];         //saves the pieces on the board. in the future it will be 10 by 40
   
   private Queue queue;
   
@@ -65,7 +65,8 @@ public class Tetris implements Type{
   //////////
   
   private void block(int x, int y){
-        int k = board[x][y];
+        
+        int k = board[y][x];
         
         image(blocks[k], x*30+250, y*30+50);        
         
@@ -102,7 +103,7 @@ public class Tetris implements Type{
        }
      }
      
-          
+         
      //gravity
      if( time > 5040 ){
        time = 0;
@@ -126,14 +127,14 @@ public class Tetris implements Type{
      coords = piece.getPosition();
      tint(192,80);
      for(int i = 0; i<4; i++){
-       block(coords[2*i], coords[2*i+1] + shadowPiece, piece.getPiece());
+       block(coords[2*i+1], coords[2*i] + shadowPiece, piece.getPiece());
      }
      noTint();
 
      //renders tentative piece
      coords = piece.getPosition();
      for(int i = 0; i<4; i++){
-       block(coords[2*i], coords[2*i+1], piece.getPiece());
+       block(coords[2*i+1], coords[2*i], piece.getPiece());
      }
      
      //Hold piece
@@ -144,6 +145,7 @@ public class Tetris implements Type{
        image(previews[hold],158,105);
        noTint();
      }
+     
      
      //renders preview
      for(int i = 0; i<5; i++){
@@ -161,53 +163,60 @@ public class Tetris implements Type{
   public void keypress(int c){
     
     softDrop = false;
-
-    if(c == 32){//space
+    
+    switch(c){
       
-      //move piece down
-      while(piece.checkNext(0,1)){
-       piece.setPosition(0,1);
-       --shadowPiece;
-      }
-      //saves piece on board
-      time = 5040;
-      //changed from set to create blink effect
-    
-    }
-    
-    if(c == 67 && canHold){//C or hold
-      int temp = hold;
-      hold = piece.getPiece();
-      if (temp == 0){  
-        piece = new Piece(queue.nextPiece(),board);
-      }
-      else{
-        piece = new Piece(temp,board);
-      }
-      shadowPiece = piece.shadowPiece(0,0);
-      canHold = false;
-    }
-    
-    if(c == 37 && piece.checkNext(-1,0)){//left
-      piece.setPosition(-1,0);
-      shadowPiece = piece.shadowPiece(1,0);
-    }
-    
-    if(c == 39 && piece.checkNext(1,0)){//right
-      piece.setPosition(1,0);
-      shadowPiece = piece.shadowPiece(1,0);
-    }
-    
-    if(c == 38 && piece.checkRotate()){
-      piece.setRotate();
-      shadowPiece = piece.shadowPiece(10,10);
-    }
-    
-    if(c == 40 && piece.checkNext(0,1)){//down
-      //piece.setPosition(0,1);
-      softDrop = true;
-    }
+      case 38:
+        if(piece.checkRotate()){
+          piece.setRotate();
+          shadowPiece = piece.shadowPiece(10,10);
+        }
+        break;
+      case 37:
+        if(piece.checkNext(-1,0)){//left
+          piece.setPosition(-1,0);
+          shadowPiece = piece.shadowPiece(1,0);
+        }
+        break;
+      case 39:
+        if(piece.checkNext(1,0)){//right
+          piece.setPosition(1,0);
+          shadowPiece = piece.shadowPiece(1,0);
+        }
+        break;
+      case 40:
+        if(piece.checkNext(0,1)){//down
+        //piece.setPosition(0,1);
+        softDrop = true;
+        }
+        break;
+        
+      case 67:
+        if(canHold){//C or hold
+          int temp = hold;
+          hold = piece.getPiece();
+          if (temp == 0){  
+            piece = new Piece(queue.nextPiece(),board);
+          }
+          else{
+            piece = new Piece(temp,board);
+          }
+          shadowPiece = piece.shadowPiece(0,0);
+          canHold = false;
+        }
+        break;
 
+      case 32:
+          //space
+          //move piece down
+          while(piece.checkNext(0,1)){
+           piece.setPosition(0,1);
+           --shadowPiece;
+          }
+          //saves piece on board
+          time = 5040;
+          //changed from set to create blink effect
+    }
     
   }
 
