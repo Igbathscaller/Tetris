@@ -32,3 +32,6 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 - ShadowPiece is now saved as an integer (height from current piece).
 - ShadowPiece renders properly and is transparent. Original Piece takes precedence.
 - Spinning and Rotation without kicks implemented. (O piece shouldn't move when spinning)
+
+5/30/2021
+- Made the board into a col by row matrix. (THIS MIGHT CAUSE MANY BUGS. IF FOUND PLS REPORT!)
