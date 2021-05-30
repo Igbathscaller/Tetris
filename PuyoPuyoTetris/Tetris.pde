@@ -166,10 +166,21 @@ public class Tetris implements Type{
     
     switch(c){
       
+      case 40:
+        if(piece.checkNext(0,1)){//down
+        //piece.setPosition(0,1);
+        softDrop = true;
+        }
+        break;
+
       case 38:
-        if(piece.checkRotate()){
+        boolean spin = false;
+        for(int kick = 0; !spin && kick<5; kick++){
+           spin = piece.checkRotate(kick);
+        }
+        if(spin){
           piece.setRotate();
-          shadowPiece = piece.shadowPiece(10,10);
+          shadowPiece = piece.shadowPiece(255,255);
         }
         break;
       case 37:
@@ -183,14 +194,7 @@ public class Tetris implements Type{
           piece.setPosition(1,0);
           shadowPiece = piece.shadowPiece(1,0);
         }
-        break;
-      case 40:
-        if(piece.checkNext(0,1)){//down
-        //piece.setPosition(0,1);
-        softDrop = true;
-        }
-        break;
-        
+        break;        
       case 67:
         if(canHold){//C or hold
           int temp = hold;

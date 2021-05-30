@@ -16,10 +16,12 @@ public class Piece{
     // *     all pieces have 0,0 so it is not marked.
     // *X* is the j piece. 
                                     
-   public int[][]placements = 
-   {Constants.rotate0,Constants.rotate1,Constants.rotate2,Constants.rotate3};
+    public int[][]placements = 
+    {Constants.rotate0,Constants.rotate1,Constants.rotate2,Constants.rotate3};
+    public int[][]SRS = Constants.SRS;
     
-   public Piece(int p, int[][]board){
+    
+    public Piece(int p, int[][]board){
       
       this.board = board;  //initialize board;
 
@@ -108,20 +110,25 @@ public class Piece{
          check = temp;
          
          rotation = (rotation + 1) & 3;
+         px = positions[1];
+         py = positions[0];
     }
     
-    public boolean checkRotate() {
-      check[1] = px;
-      check[0] = py;
+    public boolean checkRotate(int kick) {
+      int temp = (rotation+1)&3;
       
-      boolean swap = true;      
+      check[1] = px + SRS[temp][2*kick];
+      check[0] = py - SRS[temp][2*kick+1];      
+      
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] >=0 && check[1] <20 && //check its on the board
+                     board[check[0]][check[1]]==0;      
       
       for(int i = 0; i<6 && swap; i+=2){
         
-        check[i+3] = px + placements[(rotation+1)&3][6*piece+i]; //x
-        check[i+2] = py + placements[(rotation+1)&3][6*piece+i+1];   //y
+        check[i+3] = check[1] + placements[temp][6*piece+i];   //x
+        check[i+2] = check[0] + placements[temp][6*piece+i+1]; //y
         
-        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2]>=0 && check[i+2] <20 && //check its on the board
+        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] >=0 && check[i+2] <20 && //check its on the board
                 board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
                 
       }
