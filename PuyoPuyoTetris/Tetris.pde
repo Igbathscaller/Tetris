@@ -24,7 +24,9 @@ public class Tetris implements Type{
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
   private int time = 0;
   private int speed = 100;
-  //checks if last key clicked is down.
+  
+  private int ARR = 1;
+  private int DAS = 0;
   
   
   //[left, right] have effects when held
@@ -32,6 +34,7 @@ public class Tetris implements Type{
   
   //[ space, up, z, c, down ] should not reactivate when held
   private boolean[]keyclick = new boolean[5];
+  
   
   
   Tetris(){
