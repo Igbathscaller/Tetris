@@ -51,11 +51,11 @@ public class Tetris implements Type{
     fill(255);
     rect(250,50,300,600);
     
-    for(int i = 0; i<8;i++){
+    for(int i = 0; i<8;++i){
       blocks[i] =  loadImage("Assets/" + i + ".png");
     }
     
-    for(int i = 1; i<8;i++){
+    for(int i = 1; i<8;++i){
       previews[i] = loadImage("Assets/Preview" + i + ".jpg");
     }
     
@@ -88,7 +88,7 @@ public class Tetris implements Type{
       coords = piece.getPosition();
       
       //save piece
-      for(int i = 0; i<4; i++){
+      for(int i = 0; i<4; ++i){
         board[ coords[2*i] ][ coords[2*i+1] ] = piece.getPiece();
       }
       
@@ -97,17 +97,17 @@ public class Tetris implements Type{
       int[] lines = { coords[0], coords[2], coords[4], coords[6] };//y values
       Arrays.sort(lines);
       
-      for(int i = 0; i<4; i++){
+      for(int i = 0; i<4; ++i){
         
         if(i==0 || lines[i] != lines[i-1]){
           boolean filled = true;
           
-          for(int j = 0; j<10 && filled; j++){ //checks if line is filled.
+          for(int j = 0; j<10 && filled; ++j){ //checks if line is filled.
             filled = board[lines[i]][j] > 0;
           }
           
           if(filled){//move lines down
-            for(int l = lines[i]; l>0; l--){
+            for(int l = lines[i]; l>0; --l){
               board[l] = board[l-1];
             }
             board[0] = new int[10];
@@ -128,8 +128,8 @@ public class Tetris implements Type{
   public void go(){
     
      //renders board
-     for(int i = 0; i<10; i++){
-       for(int j = 0; j<20; j++){
+     for(int i = 0; i<10; ++i){
+       for(int j = 0; j<20; ++j){
          block(i,j);
        }
      }
@@ -147,22 +147,38 @@ public class Tetris implements Type{
      else if(time > 10000){
         //save piece
         setPiece();
+        time = 0;
      }     
      else{
        time += speed;
      }
+     
+     //renders Left/Right
+     if(keyheld[0] > 0 && ++keyheld[0] > 10){
+        if(piece.checkNext(-1,0)){
+           piece.setPosition(-1,0);
+           shadowPiece = piece.shadowPiece(-1,0);
+          }
+     }
+     if(keyheld[1] > 0 && ++keyheld[1] > 10){
+          if(piece.checkNext(1,0)){
+            piece.setPosition(1,0);
+            shadowPiece = piece.shadowPiece(1,0);
+          }
+     }
+     
 
      //ghost piece
      coords = piece.getPosition();
      tint(192,80);
-     for(int i = 0; i<4; i++){
+     for(int i = 0; i<4; ++i){
        block(coords[2*i+1], coords[2*i] + shadowPiece, piece.getPiece());
      }
      noTint();
 
      //renders tentative piece
      coords = piece.getPosition();
-     for(int i = 0; i<4; i++){
+     for(int i = 0; i<4; ++i){
        block(coords[2*i+1], coords[2*i], piece.getPiece());
      }
      
@@ -177,7 +193,7 @@ public class Tetris implements Type{
      
      
      //renders preview
-     for(int i = 0; i<5; i++){
+     for(int i = 0; i<5; ++i){
        int k = queue.getPiece(i);
        image(previews[k], 568, 70+55*i);
      }
@@ -205,7 +221,7 @@ public class Tetris implements Type{
           
           //saves piece on board
           //changed from set to create blink effect
-          time = 5040;
+          time = 10000;
           keyclick[0] = true;
         }
         break;
@@ -213,7 +229,7 @@ public class Tetris implements Type{
       case 38://up
         if(!keyclick[1]){
           boolean spin = false;
-          for(int kick = 0; !spin && kick<5; kick++){
+          for(int kick = 0; !spin && kick<5; ++kick){
              spin = piece.checkClockwise(kick);
           }
           if(spin){
@@ -227,7 +243,7 @@ public class Tetris implements Type{
       case 90://z
         if(!keyclick[2]){
           boolean spin = false;
-          for(int kick = 0; !spin && kick<5; kick++){
+          for(int kick = 0; !spin && kick<5; ++kick){
              spin = piece.checkCClockwise(kick);
           }
           if(spin){
@@ -263,17 +279,23 @@ public class Tetris implements Type{
 
       
         
-      case 37:
-        if(piece.checkNext(-1,0)){//left
-          piece.setPosition(-1,0);
-          shadowPiece = piece.shadowPiece(1,0);
+      case 37://left
+        if(keyheld[0] == 0){
+          if(piece.checkNext(-1,0)){
+            piece.setPosition(-1,0);
+            shadowPiece = piece.shadowPiece(-1,0);
+          }
+          ++keyheld[0];
         }
         break;
         
-      case 39:
-        if(piece.checkNext(1,0)){//right
-          piece.setPosition(1,0);
-          shadowPiece = piece.shadowPiece(1,0);
+      case 39://right
+        if(keyheld[1] == 0){
+          if(piece.checkNext(1,0)){
+            piece.setPosition(1,0);
+            shadowPiece = piece.shadowPiece(1,0);
+          }
+          ++keyheld[1];
         }
         break;    
 
