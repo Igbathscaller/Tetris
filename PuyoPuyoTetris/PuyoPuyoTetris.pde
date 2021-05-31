@@ -65,3 +65,9 @@ void keyPressed() {
     }
     System.out.println(keyCode);
   }
+
+void keyReleased() {
+    if(ongoing){
+      game.keyrelease(keyCode);
+    }
+}

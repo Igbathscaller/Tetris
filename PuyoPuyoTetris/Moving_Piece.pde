@@ -104,17 +104,23 @@ public class Piece{
     
     
     
-    public void setRotate() {
+    public void setRotate(boolean clockwise) {
          int[]temp = positions;  //makes position from check
          positions = check;      //and gives check a garbage array
          check = temp;
          
-         rotation = (rotation + 1) & 3;
+         if(clockwise){
+           rotation = (rotation + 1) & 3;
+         }
+         else{
+           rotation = (rotation + 3) & 3;
+         }
+         
          px = positions[1];
          py = positions[0];
     }
     
-    public boolean checkRotate(int kick) {
+    public boolean checkClockwise(int kick) {//Default clockwise
       int temp = (rotation+1)&3;
       
       check[1] = px + SRS[temp][2*kick];
@@ -135,6 +141,30 @@ public class Piece{
       
       return swap;
     }
+    
+    public boolean checkCClockwise(int kick) {//Counterclockwise 
+      int temp = (rotation+3)&3;
+      
+      check[1] = px - SRS[rotation][2*kick];   //negate checks
+      check[0] = py + SRS[rotation][2*kick+1]; //for reverse
+      
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] >=0 && check[1] <20 && //check its on the board
+                     board[check[0]][check[1]]==0;      
+      
+      for(int i = 0; i<6 && swap; i+=2){
+        
+        check[i+3] = check[1] + placements[temp][6*piece+i];   //x
+        check[i+2] = check[0] + placements[temp][6*piece+i+1]; //y
+        
+        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] >=0 && check[i+2] <20 && //check its on the board
+                board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
+                
+      }
+      
+      return swap;
+    }
+    
+    
     
     
      

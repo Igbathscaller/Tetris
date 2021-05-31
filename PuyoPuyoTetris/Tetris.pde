@@ -25,9 +25,13 @@ public class Tetris implements Type{
   private int time = 0;
   private int speed = 100;
   //checks if last key clicked is down.
-  private boolean softDrop = false; //Combined with keypressed checks if down is being held. 
   
   
+  //[left, right] have effects when held
+  private int[] keyheld = new int[2];
+  
+  //[ space, up, z, c, down ] should not reactivate when held
+  private boolean[]keyclick = new boolean[5];
   
   
   Tetris(){
@@ -132,20 +136,18 @@ public class Tetris implements Type{
      
          
      //gravity
-     if( time > 5040 ){
+     if( time > 5040 && piece.checkNext(0,1)){
        time = 0;
-       if (piece.checkNext(0,1)){
-         piece.setPosition(0,1);
-         shadowPiece = piece.shadowPiece(0,1);
+       piece.setPosition(0,1);
+       shadowPiece = piece.shadowPiece(0,1);
        }
-       else{
-        //save piece
-        setPiece();
-       }
-     }
-     else if(softDrop && keyPressed){//soft drop
+     else if(time < 5040 && keyclick[4]){//soft drop
        time += speed*20;
      }
+     else if(time > 10000){
+        //save piece
+        setPiece();
+     }     
      else{
        time += speed;
      }
@@ -188,42 +190,56 @@ public class Tetris implements Type{
   
   
   public void keypress(int c){
-    
-    softDrop = false;
-    
+        
     switch(c){
       
-      case 40:
-        if(piece.checkNext(0,1)){//down
-        //piece.setPosition(0,1);
-        softDrop = true;
+      case 32: //space
+        
+        if(!keyclick[0]){
+          
+          //move piece down
+          while(piece.checkNext(0,1)){
+           piece.setPosition(0,1);
+           --shadowPiece;
+          }
+          
+          //saves piece on board
+          //changed from set to create blink effect
+          time = 5040;
+          keyclick[0] = true;
         }
         break;
-
-      case 38:
-        boolean spin = false;
-        for(int kick = 0; !spin && kick<5; kick++){
-           spin = piece.checkRotate(kick);
-        }
-        if(spin){
-          piece.setRotate();
-          shadowPiece = piece.shadowPiece(255,255);
-        }
-        break;
-      case 37:
-        if(piece.checkNext(-1,0)){//left
-          piece.setPosition(-1,0);
-          shadowPiece = piece.shadowPiece(1,0);
+      
+      case 38://up
+        if(!keyclick[1]){
+          boolean spin = false;
+          for(int kick = 0; !spin && kick<5; kick++){
+             spin = piece.checkClockwise(kick);
+          }
+          if(spin){
+            piece.setRotate(true);
+            shadowPiece = piece.shadowPiece(255,255);
+          }
+          keyclick[1] = true;
         }
         break;
-      case 39:
-        if(piece.checkNext(1,0)){//right
-          piece.setPosition(1,0);
-          shadowPiece = piece.shadowPiece(1,0);
+      
+      case 90://z
+        if(!keyclick[2]){
+          boolean spin = false;
+          for(int kick = 0; !spin && kick<5; kick++){
+             spin = piece.checkCClockwise(kick);
+          }
+          if(spin){
+            piece.setRotate(false);
+            shadowPiece = piece.shadowPiece(255,255);
+          }
+          keyclick[1] = true;
         }
-        break;        
-      case 67:
-        if(canHold){//C or hold
+        break;
+        
+      case 67://C or hold
+        if(canHold && !keyclick[2]){
           int temp = hold;
           hold = piece.getPiece();
           if (temp == 0){  
@@ -233,22 +249,64 @@ public class Tetris implements Type{
             piece = new Piece(temp,board);
           }
           shadowPiece = piece.shadowPiece(0,0);
+          
+          //double ban usage
           canHold = false;
         }
+          keyclick[3] = true;
+        break;
+        
+        
+      case 40://down
+        keyclick[4] = true;
         break;
 
-      case 32:
-          //space
-          //move piece down
-          while(piece.checkNext(0,1)){
-           piece.setPosition(0,1);
-           --shadowPiece;
-          }
-          //saves piece on board
-          time = 5040;
-          //changed from set to create blink effect
+      
+        
+      case 37:
+        if(piece.checkNext(-1,0)){//left
+          piece.setPosition(-1,0);
+          shadowPiece = piece.shadowPiece(1,0);
+        }
+        break;
+        
+      case 39:
+        if(piece.checkNext(1,0)){//right
+          piece.setPosition(1,0);
+          shadowPiece = piece.shadowPiece(1,0);
+        }
+        break;    
+
     }
     
+  }
+  
+  public void keyrelease(int c){
+        
+      switch(c){
+      
+      case 32://space
+        keyclick[0] = false;
+        break;
+      case 38://up
+        keyclick[1] = false;
+        break;
+      case 90://x
+        keyclick[2] = false;
+        break;
+      case 67://C
+        keyclick[3] = false;
+        break;
+      case 40://down
+        keyclick[4] = false;
+        break;
+      case 37://left
+        keyheld[0] = 0;
+        break;
+      case 39://right
+        keyheld[1] = 0;
+        break;    
+    }
   }
 
 }

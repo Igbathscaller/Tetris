@@ -37,5 +37,8 @@ public class PuyoPuyo implements Type{
   }
     image(photo,-250,40);  
   }
+  
+  public void keyrelease(int p){
+  }
 
 }
