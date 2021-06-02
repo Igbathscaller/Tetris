@@ -1,7 +1,7 @@
 public class Piece{
     //I might include a position of the spawned piece, but not currently sure.
     private int px = 4;
-    private int py = 18;
+    private int py = 19;
     private int piece;
     private int rotation =0;
     
