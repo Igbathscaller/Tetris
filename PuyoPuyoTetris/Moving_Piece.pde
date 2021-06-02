@@ -1,7 +1,7 @@
 public class Piece{
     //I might include a position of the spawned piece, but not currently sure.
     private int px = 4;
-    private int py = 1;
+    private int py = 18;
     private int piece;
     private int rotation =0;
     
@@ -64,7 +64,7 @@ public class Piece{
       check[1] = px + x;
       check[0] = py + y;
       
-      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <20 &&
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <40 &&
                      board[check[0]][check[1]]==0;      
       
       for(int i = 2; i<8 && swap; i+=2){
@@ -72,7 +72,7 @@ public class Piece{
         check[i+1]   = positions[i+1]+ x;    //x
         check[i]     = positions[i]  + y;    //y
         
-        swap = (check[i+1] >= 0 && check[i+1] < 10 && check[i] <20 && //check its on the board
+        swap = (check[i+1] >= 0 && check[i+1] < 10 && check[i] <40 && //check its on the board
                 board[check[i]][check[i+1]]==0);  //check it doesn't overlap anything on board
                 
       }
@@ -126,7 +126,7 @@ public class Piece{
       check[1] = px + SRS[temp][2*kick];
       check[0] = py - SRS[temp][2*kick+1];      
       
-      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] >=0 && check[1] <20 && //check its on the board
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <40 && //check its on the board
                      board[check[0]][check[1]]==0;      
       
       for(int i = 0; i<6 && swap; i+=2){
@@ -134,7 +134,7 @@ public class Piece{
         check[i+3] = check[1] + placements[temp][6*piece+i];   //x
         check[i+2] = check[0] + placements[temp][6*piece+i+1]; //y
         
-        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] >=0 && check[i+2] <20 && //check its on the board
+        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] <40 && //check its on the board
                 board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
                 
       }
@@ -148,7 +148,7 @@ public class Piece{
       check[1] = px - SRS[rotation][2*kick];   //negate checks
       check[0] = py + SRS[rotation][2*kick+1]; //for reverse
       
-      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] >=0 && check[1] <20 && //check its on the board
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[1] <40 && //check its on the board
                      board[check[0]][check[1]]==0;      
       
       for(int i = 0; i<6 && swap; i+=2){
@@ -156,7 +156,7 @@ public class Piece{
         check[i+3] = check[1] + placements[temp][6*piece+i];   //x
         check[i+2] = check[0] + placements[temp][6*piece+i+1]; //y
         
-        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] >=0 && check[i+2] <20 && //check its on the board
+        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] <40 && //check its on the board
                 board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
                 
       }
