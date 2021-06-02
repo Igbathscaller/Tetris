@@ -1,4 +1,9 @@
 public class PuyoPuyo implements Type{
+  private boolean active = true;
+  public boolean getActive() {
+    return active;
+  }
+
 
   PImage photo;
 

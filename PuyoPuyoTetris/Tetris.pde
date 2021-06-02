@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Tetris implements Type{
+  
+  private boolean active = true;
 
   //implement https://tetris.fandom.com/wiki/SRS?file=SRS-pieces.png
   //we are going to name the following
@@ -68,6 +70,10 @@ public class Tetris implements Type{
     
   }
   
+  public boolean getActive() {
+    return active;
+  }
+  
   
   //////////
   
@@ -130,6 +136,7 @@ public class Tetris implements Type{
       
       //game over
       if(!piece.checkNext(0,0)) {
+        active = false;
         System.out.println("GG");
       }
 

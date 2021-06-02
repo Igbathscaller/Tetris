@@ -23,7 +23,7 @@ void draw() {
   //if(!ongoing){
   //  initialize();
   //}
-  if(ongoing){
+  if(ongoing && game.getActive()){
     game.go();
   }
   
