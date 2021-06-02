@@ -6,7 +6,7 @@ public class Tetris implements Type{
   //we are going to name the following
   // 0:empty, 1:I, 2:J, 3:L, 4:S, 5:Z, 6:O, 7:T
   
-  private int[][] board = new int[20][10];         //saves the pieces on the board. in the future it will be 10 by 40
+  private int[][] board = new int[40][10];         //saves the pieces on the board. in the future it will be 10 by 40
   
   private Queue queue;
   
@@ -75,13 +75,13 @@ public class Tetris implements Type{
         
         int k = board[y][x];
         
-        image(blocks[k], x*30+250, y*30+50);        
+        image(blocks[k], x*30+250, 30*y-550);        
         
   }
   
   private void block(int x, int y, int p){
         
-        image(blocks[p], x*30+250, y*30+50);        
+        image(blocks[p], x*30+250, 30*y-550);        
         
   }
   
@@ -132,7 +132,7 @@ public class Tetris implements Type{
     
      //renders board
      for(int i = 0; i<10; ++i){
-       for(int j = 0; j<20; ++j){
+       for(int j = 20; j<40; ++j){
          block(i,j);
        }
      }
