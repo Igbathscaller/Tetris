@@ -52,11 +52,11 @@ void mousePressed() {
         game.initialize();
       }
       
-      if(250<mouseX && mouseX<400 && 450<mouseY && mouseY<490){
-        ongoing = true;
-        game = new DTCannon();
-        game.initialize();
-      }
+      //if(250<mouseX && mouseX<400 && 450<mouseY && mouseY<490){
+      //  ongoing = true;
+      //  game = new DTCannon();
+      //  game.initialize();
+      //}
       
    }
 }
