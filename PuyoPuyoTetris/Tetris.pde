@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Tetris implements Type{
+  
+  private boolean active = true;
 
   //implement https://tetris.fandom.com/wiki/SRS?file=SRS-pieces.png
   //we are going to name the following
@@ -68,6 +70,10 @@ public class Tetris implements Type{
     
   }
   
+  public boolean getActive() {
+    return active;
+  }
+  
   
   //////////
   
@@ -99,6 +105,7 @@ public class Tetris implements Type{
       int linesCleared = 0;
       int[] lines = { coords[0], coords[2], coords[4], coords[6] };//y values
       Arrays.sort(lines);
+     
       
       for(int i = 0; i<4; ++i){
         
@@ -121,14 +128,25 @@ public class Tetris implements Type{
         
       }
       
+      
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
       shadowPiece = piece.shadowPiece(0,0);
       canHold = true;
+      
+      //game over
+      if(!piece.checkNext(0,0)) {
+        active = false;
+        System.out.println("GG");
+      }
 
   }
   
   public void go(){
+    
+    fill (255);
+    noStroke();
+    rect(250, 0, 300, 150);
     
      //renders board
      for(int i = 0; i<10; ++i){
@@ -136,6 +154,14 @@ public class Tetris implements Type{
          block(i,j);
        }
      }
+     for(int i = 0; i<10; ++i){
+       for(int j = 18; j<20; ++j){
+         if (board[j][i] != 0) {
+           block(i,j);
+         }
+       }
+     }
+     
      
          
      //gravity

@@ -1,7 +1,7 @@
 public class Piece{
     //I might include a position of the spawned piece, but not currently sure.
     private int px = 4;
-    private int py = 18;
+    private int py = 19;
     private int piece;
     private int rotation =0;
     
@@ -148,7 +148,7 @@ public class Piece{
       check[1] = px - SRS[rotation][2*kick];   //negate checks
       check[0] = py + SRS[rotation][2*kick+1]; //for reverse
       
-      boolean swap = check[1] >= 0 && check[1] < 10 && check[1] <40 && //check its on the board
+      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <40 && //check its on the board
                      board[check[0]][check[1]]==0;      
       
       for(int i = 0; i<6 && swap; i+=2){
