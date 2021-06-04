@@ -40,3 +40,8 @@ https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/
 - Smoother Button Pressing/Holding. Smooth DAS and ARR
 - Can hold multiple buttons at the same time.
 - Created ClearEffects for the future of clearing.
+
+6/2/2021
+- Made the board a 40 by 10.
+- Game stops when you reach the top
+- Terminal say gg when you finish.

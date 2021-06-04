@@ -12,10 +12,12 @@ void initialize(){
   noFill();
   rect(100,300,105,40);
   rect(350,300,170,40);
+  rect(250,450,150,40);
   fill(0);
   textSize(30);
   text("TETRIS",105,330);
-  text("PUYOPUYO",355,330); 
+  text("PUYOPUYO",355,330);
+  text("DT DEMO",255,480); 
 }
 
 void draw() {
@@ -23,7 +25,7 @@ void draw() {
   //if(!ongoing){
   //  initialize();
   //}
-  if(ongoing){
+  if(ongoing && game.getActive()){
     game.go();
   }
   
@@ -49,6 +51,12 @@ void mousePressed() {
         game = new PuyoPuyo();
         game.initialize();
       }
+      
+      //if(250<mouseX && mouseX<400 && 450<mouseY && mouseY<490){
+      //  ongoing = true;
+      //  game = new DTCannon();
+      //  game.initialize();
+      //}
       
    }
 }

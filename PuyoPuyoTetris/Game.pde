@@ -5,5 +5,6 @@ public interface Type{
   public void keyrelease(int c);
   public void initialize();
   public void go();
+  public boolean getActive();
   
 }
