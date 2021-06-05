@@ -37,6 +37,10 @@ public class Tetris implements Type{
   //[ space, up, z, c, down ] should not reactivate when held
   private boolean[]keyclick = new boolean[5];
   
+  private int[] scoring = {0, 40, 100, 300, 1200};
+  
+  private int score = 0;
+  
   
   
   Tetris(){
@@ -128,6 +132,8 @@ public class Tetris implements Type{
         
       }
       
+      score += scoring[linesCleared];
+      
       
       //spawns new piece and moves down queue
       piece = new Piece(queue.nextPiece(),board);
@@ -162,7 +168,13 @@ public class Tetris implements Type{
        }
      }
      
+     //score reset
+     fill(255);
+     rect(width - 350,height - 75,100,50);
      
+     //score
+     fill(255,0,0);
+     text("Score: " + score, width - 335, height - 50);
          
      //gravity
      if( time > 5040 && piece.checkNext(0,1)){
