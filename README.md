@@ -55,5 +55,8 @@ Space: This will instantly drop a piece
 - Game stops when you reach the top
 - Terminal say gg when you finish.
 
+**6/4/2021**
+- Basic Scoring System
+
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
