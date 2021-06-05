@@ -133,6 +133,15 @@ public class Tetris implements Type{
       }
       
       score += scoring[linesCleared];
+      //score reset
+      fill(255);
+      rect(width - 350,height - 75,200,50);
+     
+      //score
+      fill(255,0,0);
+      text("Score: " + score, width - 335, height - 50);
+         
+
       
       
       //spawns new piece and moves down queue
@@ -168,14 +177,6 @@ public class Tetris implements Type{
        }
      }
      
-     //score reset
-     fill(255);
-     rect(width - 350,height - 75,100,50);
-     
-     //score
-     fill(255,0,0);
-     text("Score: " + score, width - 335, height - 50);
-         
      //gravity
      if( time > 5040 && piece.checkNext(0,1)){
        time = 0;

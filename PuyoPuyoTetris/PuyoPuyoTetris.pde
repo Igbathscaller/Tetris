@@ -12,12 +12,12 @@ void initialize(){
   noFill();
   rect(100,300,105,40);
   rect(350,300,170,40);
-  rect(250,450,150,40);
+  //rect(250,450,150,40);
   fill(0);
   textSize(30);
   text("TETRIS",105,330);
   text("PUYOPUYO",355,330);
-  text("DT DEMO",255,480); 
+  //text("DT DEMO",255,480); 
 }
 
 void draw() {
