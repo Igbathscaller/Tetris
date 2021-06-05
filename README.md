@@ -3,7 +3,7 @@
 Compile/run via Processing
 ## How to Play
 Once you are on the main screen, you should see two buttons: Tetris and Puyo Puyo. Clickng on them will bring you to their respective games.  
-Hitting Backspace on the Tetris or Puyo Puyo games will bring you back to the main screen.
+Hitting Backspace on the Tetris or Puyo Puyo games will bring you back to the main screen.  
 **Tetris**  
 Left, right, down arrow keys: Move the tetromino in their respective directions  
 Up arrow key: Rotates the tetromino  
