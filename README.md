@@ -1,6 +1,6 @@
 # PuyoPuyoTetris
 ## How to Run
-
+Compile/run via Processing
 ## How to Play
 Once you are on the main screen, you should see two buttons: Tetris and Puyo Puyo. Clickng on them will bring you to their respective games. 
 Hitting Backspace on the Tetris or Puyo Puyo games will bring you back to the main screen.
@@ -10,7 +10,7 @@ Up arrow key: Rotates the tetromino
 'C' key: Allows you to hold onto a tetromino. It cannot be used again until the piece moving after you hold is placed.
 Space: This will instantly drop a piece
 
-## <u>Logs<u>
+## Logs
 **5/21/2021**
 - Initialized files
 - Added a game selector (clickable interface)
@@ -43,7 +43,7 @@ Space: This will instantly drop a piece
 - Spinning and Rotation without kicks implemented. (O piece shouldn't move when spinning)
 
 **5/30/2021**
-- Made the board into a col by row matrix. (THIS MIGHT CAUSE MANY BUGS. IF FOUND PLS REPORT!)
+- Made the board into a col by row matrix. 
 - SRS is possibly complete. Might need more testing to verify.
 - Clearing lines is done (Basic Tetris Functionality is done)
 - Smoother Button Pressing/Holding. Smooth DAS and ARR
