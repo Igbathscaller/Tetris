@@ -18,14 +18,18 @@ public class Piece{
                                     
     public int[][]placements = 
     {Constants.rotate0,Constants.rotate1,Constants.rotate2,Constants.rotate3};
-    public int[][]SRS = Constants.SRS;
     
+    public int[][]SRS = Constants.SRS;//sets it to default SRS
     
     public Piece(int p, int[][]board){
       
       this.board = board;  //initialize board;
 
       piece = p;
+      
+      if(p==1){
+        SRS = Constants.ISRS;//I piece has different kick table.
+      }
       
       //initialize positions
       positions[1] = px;
