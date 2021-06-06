@@ -62,6 +62,7 @@ Space: This will instantly drop a piece
 - Created a main menu design
 - Got Puyo Puyo Piece Assets. Still requires Purifing.
 - Might not require all of them if I don't want to do interlocking pieces. 
+- I Piece has a different kick table. (fixed bug where I piece wouldn't knock off wall).
 
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
