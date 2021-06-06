@@ -58,5 +58,10 @@ Space: This will instantly drop a piece
 **6/4/2021**
 - Basic Scoring System
 
+**6/5/2021**
+- Created a main menu design
+- Got Puyo Puyo Piece Assets. Still requires Purifing.
+- Might not require all of them if I don't want to do interlocking pieces. 
+
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
