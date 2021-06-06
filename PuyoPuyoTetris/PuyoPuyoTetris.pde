@@ -1,9 +1,12 @@
 boolean ongoing = false;
 Type game;
+PImage Board;
 
 void setup(){  
-  size(800,800);
+  size(1080,720);
   background(255);
+  Board = loadImage("Assets/MainMenu.png");
+  image(Board,0,0);
   initialize();
 }
 
@@ -31,10 +34,10 @@ void draw() {
   
   noStroke();
   fill(255);
-  rect(0,0,200,20);
+  rect(880,0,200,20);
   fill(0);
   textSize(20);
-  text("FPS: "+frameRate,0,20);
+  text("FPS: "+frameRate,880,20);
 }
 
 
