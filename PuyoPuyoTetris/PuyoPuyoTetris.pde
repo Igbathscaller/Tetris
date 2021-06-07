@@ -8,6 +8,7 @@ void setup(){
   Board = loadImage("Assets/MainMenu.png");
   image(Board,0,0);
   initialize();
+
 }
 
 void initialize(){
@@ -38,6 +39,7 @@ void draw() {
   fill(0);
   textSize(20);
   text("FPS: "+frameRate,880,20);
+  
 }
 
 
@@ -46,28 +48,42 @@ void mousePressed() {
      
       int yIntercept = mouseX * 2/21 + mouseY; //y-intercept of line with -2/21 slope through mouse
       
-      int xIntercept = mouseX + mouseY/5; //x-intercept of line with 5 slope through mouse.
+      int x1Intercept = mouseX + mouseY/5; //x-intercept of line with 5 slope through mouse.
       
+      int x2Intercept = mouseX - mouseY/7; //x-intercept of line with slope -2/3 through mouse
      
       if(yIntercept > 186 && yIntercept < 405){//Top Buttons
         
-        //if (mouseX > 40 && xIntercept < 216){
+        if (mouseX > 40 && x1Intercept < 384){ // Green
+        ongoing = true;
+        game = new Tetris();
+        game.initialize();
+        }
         
-        System.out.println("Top " + mouseX + " " + mouseY);
-        
-        //}
-        
+        else if(x1Intercept > 400 && x2Intercept < 675){ // Yellow
+        System.out.println("yellow ");
+        }
+        else if(x2Intercept > 692 && mouseX < 1016){ // Red
+        System.out.println("red");
+        }
       }
       
-      else if(yIntercept > 424 && yIntercept  < 676 && mouseX > 42 && mouseX > 40 && xIntercept < 365){//Purple Button
+      else if(yIntercept > 424 && yIntercept  < 676 && mouseX > 40 && x1Intercept < 365){//Purple Button
         
         System.out.println("Purple " + mouseX + " " + mouseY);
         
       }
       
-      if(yIntercept > 460 && yIntercept < 604){//bottom right
+      else if(yIntercept > 460 && yIntercept < 610){//bottom right
         
-        System.out.println("right");
+        if(x1Intercept > 371 && x2Intercept < 675){
+          System.out.println("blue");
+        }
+        
+        else if(x2Intercept > 686 && mouseX < 1016){//orange
+          System.out.println("orange");
+        }
+        
         
       }
 
@@ -75,9 +91,7 @@ void mousePressed() {
       
       /*
       if(100<mouseX && mouseX<205 && 300<mouseY && mouseY<340){
-        ongoing = true;
-        game = new Tetris();
-        game.initialize();
+        
       }
       
       if(350<mouseX && mouseX<520 && 300<mouseY && mouseY<340){
