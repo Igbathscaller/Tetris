@@ -43,6 +43,11 @@ void draw() {
 
 void mousePressed() {
    if(mousePressed && (mouseButton == LEFT) && !ongoing){
+     
+      if(-mouseX * 2/21 + 186 < mouseY && -mouseX * 2/21 + 405 > mouseY){
+        System.out.println("Top " + mouseX + " " + mouseY);
+      }
+      /*
       if(100<mouseX && mouseX<205 && 300<mouseY && mouseY<340){
         ongoing = true;
         game = new Tetris();
@@ -60,6 +65,8 @@ void mousePressed() {
       //  game = new DTCannon();
       //  game.initialize();
       //}
+      
+      */
       
    }
 }
