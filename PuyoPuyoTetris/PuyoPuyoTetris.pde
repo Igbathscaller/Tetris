@@ -44,9 +44,35 @@ void draw() {
 void mousePressed() {
    if(mousePressed && (mouseButton == LEFT) && !ongoing){
      
-      if(-mouseX * 2/21 + 186 < mouseY && -mouseX * 2/21 + 405 > mouseY){
+      int yIntercept = mouseX * 2/21 + mouseY; //y-intercept of line with -2/21 slope through mouse
+      
+      int xIntercept = mouseX + mouseY/5; //x-intercept of line with 5 slope through mouse.
+      
+     
+      if(yIntercept > 186 && yIntercept < 405){//Top Buttons
+        
+        //if (mouseX > 40 && xIntercept < 216){
+        
         System.out.println("Top " + mouseX + " " + mouseY);
+        
+        //}
+        
       }
+      
+      else if(yIntercept > 424 && yIntercept  < 676 && mouseX > 42 && mouseX > 40 && xIntercept < 365){//Purple Button
+        
+        System.out.println("Purple " + mouseX + " " + mouseY);
+        
+      }
+      
+      if(yIntercept > 460 && yIntercept < 604){//bottom right
+        
+        System.out.println("right");
+        
+      }
+
+      
+      
       /*
       if(100<mouseX && mouseX<205 && 300<mouseY && mouseY<340){
         ongoing = true;

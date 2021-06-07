@@ -12,8 +12,20 @@ public class PuyoPuyo implements Type{
     colorMode(HSB);
   }
   
+  public void click(){
+  }
+  
   public void initialize() {
     
+  }
+  
+  public void go(){
+  }
+  
+  public void keypress(int c){
+  }
+  
+  public void keyrelease(int c){
   }
   
 }
