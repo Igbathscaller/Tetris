@@ -4,7 +4,7 @@ public class Puyo{
     private int py = 1;
     private int color1;
     private int color2;
-    private int rotation =0;
+    private int rotation = 0;
     
     private int[] positions = new int[4]; //saves current position
     private int[] check = new int[4];     //saves the possible values
@@ -52,6 +52,8 @@ public class Puyo{
       
     }
     
+    
+    /*
     public boolean checkNext(int x, int y) {
 
       check[1] = px + x;
@@ -71,6 +73,7 @@ public class Puyo{
       }
       return swap;
     }
+    */
     
     public int[] getPosition(){
       
