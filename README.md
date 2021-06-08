@@ -64,5 +64,9 @@ Space: This will instantly drop a piece
 - Might not require all of them if I don't want to do interlocking pieces. 
 - I Piece has a different kick table. (fixed bug where I piece wouldn't knock off wall).
 
+**6/7/2021**
+- Main Menu has clickable buttons. (detects box mouse is in)
+- Puyo Puyo has a new clean state.
+
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
