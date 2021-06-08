@@ -61,7 +61,9 @@ void mousePressed() {
         }
         
         else if(x1Intercept > 400 && x2Intercept < 675){ // Yellow
-        System.out.println("yellow ");
+        ongoing = true;
+        game = new PuyoPuyo();
+        game.initialize();
         }
         else if(x2Intercept > 692 && mouseX < 1016){ // Red
         System.out.println("red");

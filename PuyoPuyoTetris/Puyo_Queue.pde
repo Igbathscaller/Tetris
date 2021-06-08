@@ -20,12 +20,15 @@ public class Puyo_Queue {
     queue[1] = newPiece();
   }
   
-  public int getPiece(){
+  public int nextPiece(){
     int first = queue[0];
     queue[0] = queue[1];
     queue[1] = newPiece();
     return first;
   }
   
+  public int getPiece(int i){
+    return queue[i];
+  }
   
-}  
+}
