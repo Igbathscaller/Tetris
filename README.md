@@ -76,6 +76,7 @@ Space: This will instantly drop a piece
 
 **6/9/2021**
 - Rotation is Complete with both clockwise and counterclockwise
+- Got all interconnecting pieces in PuyoPuyo. 1 is down. 2 is up. 4 is right. 8 is left.
 
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
