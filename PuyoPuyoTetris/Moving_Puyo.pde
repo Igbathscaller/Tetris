@@ -100,8 +100,8 @@ public class Puyo{
     public boolean checkClockwise(int kick) {//Default clockwise
       int temp = (rotation+1)&3;
       
-      check[0] = px + SRS[temp][2*kick];
-      check[1] = py - SRS[temp][2*kick+1];      
+      check[0] = px + SRS[rotation][2*kick];
+      check[1] = py - SRS[rotation][2*kick+1];      
       
       boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
                      board[check[0]][check[1]]==0;
