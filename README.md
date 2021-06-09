@@ -68,5 +68,11 @@ Space: This will instantly drop a piece
 - Main Menu has clickable buttons. (detects box mouse is in)
 - Puyo Puyo has a new clean state.
 
+**6/8/2021**
+- Puyo Puyo now saves pieces and you can move left and right.
+- There is a preview for Puyo Puyo
+- The Pieces will fall after a set period of time
+- Gravity Exists
+
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
