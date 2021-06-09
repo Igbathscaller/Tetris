@@ -30,6 +30,14 @@ static class Constants{
       static int[] Ikick0 =       {0, 1, 1, 1, -2, 1, 1, -1, -2, 2};
       
       static int[][] ISRS =       {Ikick0, Ikick1, Ikick2, Ikick3}; // I piece has different SRS
+      
+      
+      static int[] puyo0 =        { 0, 0,  0,-1}; // 3->0
+      static int[] puyo1 =        { 0, 0, -1, 0}; // 0->1
+      static int[] puyo2 =        { 0, 0,  0, 1}; // 1->2
+      static int[] puyo3 =        { 0, 0,  1, 0}; // 2->3
+      
+      static int[][] puyoKick = {puyo1,puyo2,puyo3,puyo0};
 
 
 }

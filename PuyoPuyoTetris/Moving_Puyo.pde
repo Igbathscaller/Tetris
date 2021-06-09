@@ -15,7 +15,7 @@ public class Puyo{
                                     
     public int[]placements = {0,-1,1,0,0,1,-1,0};
     
-    public int[][]SRS = Constants.SRS;//sets it to default SRS
+    public int[][]SRS = Constants.puyoKick;//sets it to default SRS
     
     public Puyo(int p, int[][]board){
       
@@ -100,15 +100,15 @@ public class Puyo{
     public boolean checkClockwise(int kick) {//Default clockwise
       int temp = (rotation+1)&3;
       
-      check[0] = px + SRS[rotation][2*kick];
-      check[1] = py - SRS[rotation][2*kick+1];      
+      check[0] = px + SRS[temp][2*kick];
+      check[1] = py - SRS[temp][2*kick+1];      
       
       boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
                      board[check[0]][check[1]]==0;
       
       if (swap){
       check[2] = check[0] + placements[2*temp];
-      check[3] = check[1] - placements[2*temp+1];      
+      check[3] = check[1] + placements[2*temp+1];      
       
       swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && //check its on the board
                      board[check[2]][check[3]]==0;      
@@ -120,15 +120,15 @@ public class Puyo{
     public boolean checkCClockwise(int kick) {//Counterclockwise 
       int temp = (rotation+3)&3;
       
-      check[0] = px - SRS[temp][2*kick];
-      check[1] = py + SRS[temp][2*kick+1];      
+      check[0] = px - SRS[rotation][2*kick];
+      check[1] = py + SRS[rotation][2*kick+1];      
       
       boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
                      board[check[0]][check[1]]==0;
       
       if (swap){
       check[2] = check[0] + placements[2*temp];
-      check[3] = check[1] - placements[2*temp+1];      
+      check[3] = check[1] + placements[2*temp+1];      
       
       swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && //check its on the board
                      board[check[2]][check[3]]==0;      

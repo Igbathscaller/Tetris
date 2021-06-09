@@ -190,7 +190,7 @@ public class PuyoPuyo implements Type{
       case 38://up
         if(!keyclick[1]){
           boolean spin = false;
-          for(int kick = 0; !spin && kick<3; ++kick){
+          for(int kick = 0; !spin && kick<2; ++kick){
              spin = puyo.checkClockwise(kick);
           }
           if(spin){
@@ -203,7 +203,7 @@ public class PuyoPuyo implements Type{
       case 90://z
         if(!keyclick[2]){
           boolean spin = false;
-          for(int kick = 0; !spin && kick<3; ++kick){
+          for(int kick = 0; !spin && kick<2; ++kick){
              spin = puyo.checkCClockwise(kick);
           }
           if(spin){
