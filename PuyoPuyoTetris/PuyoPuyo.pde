@@ -6,16 +6,17 @@ public class PuyoPuyo implements Type{
 
   // 1:purple, 2:yellow, 3:blue, 4:green, 5:red
   
-  private int[][] board = new int[15][6];         //saves the pieces on the board. in the future it will be 10 by 40
+  private int[][] board = new int[6][14];    //6 by 14. x by y (each coloumn has its own gravity)
   
   private Puyo_Queue queue;
   
   private Puyo puyo;
-  private int[] coords;
+  private int[] puyos;
+  private int[] coords; //coords of piece
   
   private PImage[] blocks = new PImage[6];//image of blocks
   
-  private PImage[] previews = new PImage[4];
+  private PImage[] previews = new PImage[5];//future preview
       
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
   private int time = 0;
@@ -45,18 +46,22 @@ public class PuyoPuyo implements Type{
     strokeWeight(4);
     fill(0);
     rect(552,50,110,300);
-    rect(147,80,100,100);
-    strokeWeight(1);
-    noStroke();
+//  rect(147,80,100,100);
+    strokeWeight(4);
+    stroke(0);
     fill(255);
-    rect(250,50,300,600);
+    line(250,675,538,675);
     
     for(int i = 1; i<6;++i){
       blocks[i] =  loadImage("PuyoProcess/" + i + ".png");
+      blocks[i].resize(48,48);
+      previews[i-1] = loadImage("PuyoProcess/" + i + ".png");
+      previews[i-1].resize(48,48);
     }
     
     queue = new Puyo_Queue();
     puyo = new Puyo(queue.nextPiece(),board);
+    
     
   }
   
@@ -67,10 +72,11 @@ public class PuyoPuyo implements Type{
   
   //////////
   
+  //sets piece give piece and numbers
   private void block(int x, int y, int p){
         
         if(p>0){
-          image(blocks[p], x*30+250, 30*y-550);        
+          image(blocks[p], x*48+250, 48*y);
         }
         
   }
@@ -80,10 +86,11 @@ public class PuyoPuyo implements Type{
       
       coords = puyo.getPosition();
       
+      puyos = puyo.getPiece();
+      
       //save puyo
-      for(int i = 0; i<4; ++i){
-        board[ coords[2*i] ][ coords[2*i+1] ] = puyo.getPiece();
-      }
+      board[ coords[0] ][ coords[1] ] = puyos[0];
+      board[ coords[2] ][ coords[3] ] = puyos[1];
       
           
       //score reset
@@ -96,10 +103,11 @@ public class PuyoPuyo implements Type{
          
 
       
-      /*
+      
       //spawns new puyo and moves down queue
       puyo = new Puyo(queue.nextPiece(),board);
       
+      /*
       //game over
       if(!puyo.checkNext(0,0)) {
         active = false;
@@ -113,16 +121,16 @@ public class PuyoPuyo implements Type{
     
     fill (255);
     noStroke();
-    rect(250, 0, 300, 150);
+    rect(250, 0, 300, 675);
     
      //renders board
      for(int i = 0; i<6; ++i){
-       for(int j = 0; j<15; ++j){
-         block(i,j,board[j][i]);
+       for(int j = 0; j<14; ++j){
+         block(i,j,board[i][j]);
        }
      }
      
-     /*gravity
+     //gravity
      if( time > 5040 && puyo.checkNext(0,1)){
        time = 0;
        puyo.setPosition(0,1);
@@ -138,7 +146,7 @@ public class PuyoPuyo implements Type{
      else{
        time += speed;
      }
-     */
+     
      
      //renders Left/Right
      if(keyheld[0] > 0 && ++keyheld[0] > 10){
@@ -155,16 +163,17 @@ public class PuyoPuyo implements Type{
 
      
      //renders tentative puyo
+     puyos = puyo.getPiece();
      coords = puyo.getPosition();
-     for(int i = 0; i<2; ++i){
-       block(coords[2*i+1], coords[2*i], puyo.getPiece());
-     }
+     block(coords[0], coords[1], puyos[0]);
+     block(coords[2], coords[3], puyos[1]);
           
      //renders preview
-     //for(int i = 0; i<5; ++i){
-     //  int k = queue.getPiece(i);
-     //  image(previews[k], 568, 70+55*i);
-     //}
+       for(int i = 0; i<2; ++i){
+       int k = queue.getPiece(i);
+       image(previews[k%5], 568, 70+110*i);
+       image(previews[k/5], 568, 115+110*i);
+     }
      
   }
   
@@ -174,25 +183,10 @@ public class PuyoPuyo implements Type{
   
   
   public void keypress(int c){
-    /*
+    
     switch(c){
       
-      case 32: //space
-        
-        if(!keyclick[0]){
-          
-          //move puyo down
-          while(puyo.checkNext(0,1)){
-           puyo.setPosition(0,1);
-          }
-          
-          //saves puyo on board
-          //changed from set to create blink effect
-          time = 10000;
-          keyclick[0] = true;
-        }
-        break;
-      
+      /*
       case 38://up
         if(!keyclick[1]){
           boolean spin = false;
@@ -218,12 +212,11 @@ public class PuyoPuyo implements Type{
           keyclick[1] = true;
         }
         break;
-        
+      */
                 
       case 40://down
         keyclick[4] = true;
         break;
-
       
         
       case 37://left
@@ -245,7 +238,6 @@ public class PuyoPuyo implements Type{
         break;    
 
     }
-    */
   }
   
   public void keyrelease(int c){
