@@ -292,7 +292,7 @@ public class Tetris implements Type{
             piece.setRotate(false);
             shadowPiece = piece.shadowPiece(255,255);
           }
-          keyclick[1] = true;
+          keyclick[2] = true;
         }
         break;
         

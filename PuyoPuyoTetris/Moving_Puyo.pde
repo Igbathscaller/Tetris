@@ -79,7 +79,7 @@ public class Puyo{
     
     }    
     
-    /*
+    
     public void setRotate(boolean clockwise) {
          int[]temp = positions;  //makes position from check
          positions = check;      //and gives check a garbage array
@@ -92,49 +92,49 @@ public class Puyo{
            rotation = (rotation + 3) & 3;
          }
          
-         px = positions[1];
-         py = positions[0];
+         px = positions[0];
+         py = positions[1];
     }
-    */
-    /*
+    
+    
     public boolean checkClockwise(int kick) {//Default clockwise
       int temp = (rotation+1)&3;
       
-      check[1] = px + SRS[temp][2*kick];
-      check[0] = py - SRS[temp][2*kick+1];      
+      check[0] = px + SRS[rotation][2*kick];
+      check[1] = py - SRS[rotation][2*kick+1];      
       
-      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <40 && //check its on the board
+      boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
                      board[check[0]][check[1]]==0;
-                           
-      check[1] = px + SRS[temp][2*kick] + placements[rotation];
-      check[0] = py - SRS[temp][2*kick+1] - placements[rotation];      
       
-      swap &= check[1] >= 0 && check[1] < 10 && check[0] <40 && //check its on the board
-                     board[check[0]][check[1]]==0;      
-            
+      if (swap){
+      check[2] = check[0] + placements[2*temp];
+      check[3] = check[1] - placements[2*temp+1];      
+      
+      swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && //check its on the board
+                     board[check[2]][check[3]]==0;      
+      }
+      
       return swap;
     }
     
     public boolean checkCClockwise(int kick) {//Counterclockwise 
       int temp = (rotation+3)&3;
       
-      check[1] = px - SRS[rotation][2*kick];   //negate checks
-      check[0] = py + SRS[rotation][2*kick+1]; //for reverse
+      check[0] = px - SRS[temp][2*kick];
+      check[1] = py + SRS[temp][2*kick+1];      
       
-      boolean swap = check[1] >= 0 && check[1] < 10 && check[0] <40 && //check its on the board
-                     board[check[0]][check[1]]==0;      
+      boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
+                     board[check[0]][check[1]]==0;
       
-      for(int i = 0; i<6 && swap; i+=2){
-        
-        check[i+3] = check[1] + placements[temp][6*piece+i];   //x
-        check[i+2] = check[0] + placements[temp][6*piece+i+1]; //y
-        
-        swap = (check[i+3] >= 0 && check[i+3] < 10 && check[i+2] <40 && //check its on the board
-                board[check[i+2]][check[i+3]]==0);  //check it doesn't overlap anything on board
-                
+      if (swap){
+      check[2] = check[0] + placements[2*temp];
+      check[3] = check[1] - placements[2*temp+1];      
+      
+      swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && //check its on the board
+                     board[check[2]][check[3]]==0;      
       }
       
       return swap;
-    } */ 
+    } 
      
 }

@@ -186,11 +186,11 @@ public class PuyoPuyo implements Type{
     
     switch(c){
       
-      /*
+      
       case 38://up
         if(!keyclick[1]){
           boolean spin = false;
-          for(int kick = 0; !spin && kick<5; ++kick){
+          for(int kick = 0; !spin && kick<3; ++kick){
              spin = puyo.checkClockwise(kick);
           }
           if(spin){
@@ -203,16 +203,16 @@ public class PuyoPuyo implements Type{
       case 90://z
         if(!keyclick[2]){
           boolean spin = false;
-          for(int kick = 0; !spin && kick<5; ++kick){
+          for(int kick = 0; !spin && kick<3; ++kick){
              spin = puyo.checkCClockwise(kick);
           }
           if(spin){
             puyo.setRotate(false);
           }
-          keyclick[1] = true;
+          keyclick[2] = true;
         }
         break;
-      */
+      
                 
       case 40://down
         keyclick[4] = true;
