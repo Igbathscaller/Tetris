@@ -74,5 +74,8 @@ Space: This will instantly drop a piece
 - The Pieces will fall after a set period of time
 - Gravity Exists
 
+**6/9/2021**
+- Rotation is Complete with both clockwise and counterclockwise
+
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
