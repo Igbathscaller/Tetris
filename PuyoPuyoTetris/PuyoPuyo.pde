@@ -16,6 +16,8 @@ public class PuyoPuyo implements Type{
   
   private PImage[] blocks = new PImage[6];//image of blocks
   
+  private PImage[][] puyoImg = Constants.Puyos;
+  
   private PImage[] previews = new PImage[5];//future preview
       
   //This is for future reference, since we will need a timer for gravity as well as maybe DAS?
@@ -75,8 +77,9 @@ public class PuyoPuyo implements Type{
   //sets piece give piece and numbers
   private void block(int x, int y, int p){
         
-        if(p>0){
-          image(blocks[p], x*48+250, 48*y);
+        if(p>0){//     color  position  
+          System.out.println(p);
+          image(puyoImg[p/16][p&15], x*48+250, 48*y);
         }
         
   }
@@ -89,8 +92,9 @@ public class PuyoPuyo implements Type{
       puyos = puyo.getPiece();
       
       //save puyo
-      board[ coords[0] ][ coords[1] ] = puyos[0];
-      board[ coords[2] ][ coords[3] ] = puyos[1];
+      trigger(coords[0],coords[1],puyos[0]);
+      
+      trigger(coords[2],coords[3],puyos[1]);
       
           
       //score reset
@@ -100,8 +104,6 @@ public class PuyoPuyo implements Type{
       //score
       fill(255,0,0);
       text("Score: " + score, width - 335, height - 50);
-         
-
       
       
       //spawns new puyo and moves down queue
@@ -116,6 +118,32 @@ public class PuyoPuyo implements Type{
       */
 
   }
+  
+  //triggers nearby puyos. Making them connect.
+  private void trigger(int x, int y, int p){
+    
+    board[ x ][ y ] = p*16;
+    
+    //connect same color
+    if( x + 1< 6  && board[x+1][y]>>4 == p){
+      board[x][y] += 4;
+      board[x+1][y] += 8;
+    }
+    if( x - 1>= 0  && board[x-1][y]>>4 == p){
+      board[x][y] += 8;
+      board[x-1][y] += 4;
+    }
+    if( y + 1< 14 && board[x][y+1]>>4 == p){
+      board[x][y] += 1;
+      board[x][y+1] += 2;
+    }
+    if( y - 1<= 0  && board[x][y-1]>>4 == p){
+      board[x][y] += 2;
+      board[x][y-1] += 1;
+    }
+    
+  }
+  
   
   public void go(){
     
@@ -165,8 +193,8 @@ public class PuyoPuyo implements Type{
      //renders tentative puyo
      puyos = puyo.getPiece();
      coords = puyo.getPosition();
-     block(coords[0], coords[1], puyos[0]);
-     block(coords[2], coords[3], puyos[1]);
+     block(coords[0], coords[1], puyos[0]*16);
+     block(coords[2], coords[3], puyos[1]*16);
           
      //renders preview
        for(int i = 0; i<2; ++i){

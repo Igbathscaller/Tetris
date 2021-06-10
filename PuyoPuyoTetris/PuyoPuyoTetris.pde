@@ -6,6 +6,15 @@ void setup(){
   size(1080,720);
   background(255);
   Board = loadImage("Assets/MainMenu.png");
+  
+  PImage[][] Puyos = Constants.Puyos; //load 80 puyos into memory
+  for(int i = 1; i <6 ; i++){
+    for(int j = 0; j<16; j++){
+        Puyos[i][j] = loadImage("PuyoProcess/" + i +'_'+ j + ".png");
+        Puyos[i][j].resize(48,48);
+      }
+  }
+  
   initialize();
 }
 

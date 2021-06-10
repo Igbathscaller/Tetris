@@ -38,6 +38,8 @@ static class Constants{
       static int[] puyo3 =        { 0, 0,  1, 0}; // 2->3
       
       static int[][] puyoKick = {puyo1,puyo2,puyo3,puyo0};
+      
+      static PImage[][] Puyos = new PImage[6][16];
 
 
 }

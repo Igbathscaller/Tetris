@@ -103,14 +103,14 @@ public class Puyo{
       check[0] = px + SRS[rotation][2*kick];
       check[1] = py - SRS[rotation][2*kick+1];      
       
-      boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
+      boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && check[1] >=0 &&//check its on the board
                      board[check[0]][check[1]]==0;
       
       if (swap){
       check[2] = check[0] + placements[2*temp];
       check[3] = check[1] + placements[2*temp+1];      
       
-      swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && //check its on the board
+      swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && check[3] >=0 &&//check its on the board
                      board[check[2]][check[3]]==0;      
       }
       
@@ -123,14 +123,14 @@ public class Puyo{
       check[0] = px - SRS[rotation][2*kick];
       check[1] = py + SRS[rotation][2*kick+1];      
       
-      boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && //check its on the board
+      boolean swap = check[0] >= 0 && check[0] < 6 && check[1] <14 && check[1] >=0 &&//check its on the board
                      board[check[0]][check[1]]==0;
       
       if (swap){
       check[2] = check[0] + placements[2*temp];
       check[3] = check[1] + placements[2*temp+1];      
       
-      swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && //check its on the board
+      swap = check[2] >= 0 && check[2] < 6 && check[3] <14 && check[3] >=0 &&//check its on the board
                      board[check[2]][check[3]]==0;      
       }
       
