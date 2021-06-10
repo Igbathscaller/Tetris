@@ -163,7 +163,7 @@ public class P1Tetris implements Comp{
       if (attack.size()>0 && linesCleared > 0){
         counter();
       }
-      else if(attack.size()>0 && linesCleared == 0){
+      else if(attack.size()>0){
         attack();
       }
       
