@@ -107,13 +107,13 @@ public class PuyoPuyo implements Type{
       //spawns new puyo and moves down queue
       puyo = new Puyo(queue.nextPiece(),board);
       
-      /*
+      
       //game over
       if(!puyo.checkNext(0,0)) {
         active = false;
         System.out.println("GG");
       }
-      */
+      
 
   }
   
