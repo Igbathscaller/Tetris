@@ -27,10 +27,10 @@ public class P2Tetris implements Type{
   private int time = 0;
   private int speed = 100;  
   
-  //[left, right] have effects when held
+  //[d, g] have effects when held
   private int[] keyheld = new int[2];
   
-  //[ space, up, z, c, down ] should not reactivate when held
+  //[ space, r, z, x, f ] should not reactivate when held
   private boolean[]keyclick = new boolean[5];
   
   private int[] scoring = {0, 40, 100, 300, 1200};
@@ -275,7 +275,7 @@ public class P2Tetris implements Type{
         
     switch(c){
       
-      case 32: //space
+      case 16: //space
         
         if(!keyclick[0]){
           
@@ -306,7 +306,7 @@ public class P2Tetris implements Type{
         }
         break;
       
-      case 90://z
+      case 44://z
         if(!keyclick[2]){
           boolean spin = false;
           for(int kick = 0; !spin && kick<5; ++kick){
@@ -320,7 +320,7 @@ public class P2Tetris implements Type{
         }
         break;
         
-      case 67://C or hold
+      case 46://C or hold
         if(canHold && !keyclick[2]){
           int temp = hold;
           hold = piece.getPiece();
@@ -373,16 +373,16 @@ public class P2Tetris implements Type{
         
       switch(c){
       
-      case 32://space
+      case 16://space
         keyclick[0] = false;
         break;
       case 38://up
         keyclick[1] = false;
         break;
-      case 90://x
+      case 44://x
         keyclick[2] = false;
         break;
-      case 67://C
+      case 46://C
         keyclick[3] = false;
         break;
       case 40://down

@@ -30,7 +30,7 @@ public class P1Tetris implements Type{
   //[left, right] have effects when held
   private int[] keyheld = new int[2];
   
-  //[ space, up, z, c, down ] should not reactivate when held
+  //[ shift, up, <, >, down ] should not reactivate when held
   private boolean[]keyclick = new boolean[5];
   
   private int[] scoring = {0, 40, 100, 300, 1200};
@@ -270,7 +270,7 @@ public class P1Tetris implements Type{
   }
   
   
-  public void keypress(int c){
+    public void keypress(int c){
         
     switch(c){
       
@@ -291,7 +291,7 @@ public class P1Tetris implements Type{
         }
         break;
       
-      case 38://up
+      case 82://up
         if(!keyclick[1]){
           boolean spin = false;
           for(int kick = 0; !spin && kick<5; ++kick){
@@ -319,7 +319,7 @@ public class P1Tetris implements Type{
         }
         break;
         
-      case 67://C or hold
+      case 88://C or hold
         if(canHold && !keyclick[2]){
           int temp = hold;
           hold = piece.getPiece();
@@ -338,13 +338,13 @@ public class P1Tetris implements Type{
         break;
         
         
-      case 40://down
+      case 70://down
         keyclick[4] = true;
         break;
 
       
         
-      case 37://left
+      case 68://left
         if(keyheld[0] == 0){
           if(piece.checkNext(-1,0)){
             piece.setPosition(-1,0);
@@ -354,7 +354,7 @@ public class P1Tetris implements Type{
         }
         break;
         
-      case 39://right
+      case 71://right
         if(keyheld[1] == 0){
           if(piece.checkNext(1,0)){
             piece.setPosition(1,0);
@@ -375,25 +375,26 @@ public class P1Tetris implements Type{
       case 32://space
         keyclick[0] = false;
         break;
-      case 38://up
+      case 82://up
         keyclick[1] = false;
         break;
       case 90://x
         keyclick[2] = false;
         break;
-      case 67://C
+      case 88://C
         keyclick[3] = false;
         break;
-      case 40://down
+      case 70://down
         keyclick[4] = false;
         break;
-      case 37://left
+      case 68://left
         keyheld[0] = 0;
         break;
-      case 39://right
+      case 71://right
         keyheld[1] = 0;
         break;    
     }
   }
+
 
 }
