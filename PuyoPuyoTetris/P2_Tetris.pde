@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class P2Tetris implements Type{
+public class P2Tetris implements Comp{
   
   private boolean active = true;
 
@@ -48,7 +48,7 @@ public class P2Tetris implements Type{
     colorMode(HSB);
   }
   
-  public void initialize(){
+  public void initialize(long seed){
     stroke(#2de0da);
     strokeWeight(4);
     fill(0);
@@ -72,7 +72,7 @@ public class P2Tetris implements Type{
       previews[i] = loadImage("Assets/Preview" + i + ".jpg");
     }
     
-    queue = new Queue();
+    queue = new Queue(seed);
     piece = new Piece(queue.nextPiece(),board);
     shadowPiece = piece.shadowPiece(0,0);
         
@@ -396,5 +396,11 @@ public class P2Tetris implements Type{
         break;    
     }
   }
+  
+  public void interact(Comp p1){
+    
+    
+  }
+
 
 }

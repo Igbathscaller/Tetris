@@ -15,11 +15,15 @@ public class VsTetris implements Type{
     P1.keyrelease(c);
     P2.keyrelease(c);
   }
+  
   public void initialize(){
     background(255);
-    P1.initialize();
-    P2.initialize();
+    Random gen = new Random();
+    long seed = gen.nextLong();
+    P1.initialize(seed);
+    P2.initialize(seed);
   }
+  
   public void go(){
     pushMatrix();
     translate(-25,0);
@@ -27,6 +31,7 @@ public class VsTetris implements Type{
     P2.go();
     popMatrix();
   }
+  
   public boolean getActive(){
     return P1.getActive() && P2.getActive();
   }
