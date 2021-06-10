@@ -79,6 +79,7 @@ void mousePressed() {
       
       else if(yIntercept > 424 && yIntercept  < 676 && mouseX > 40 && x1Intercept < 365){//Purple Button
         
+        translate(-25,0);
         ongoing = true;
         game = new VsTetris();
         game.initialize();

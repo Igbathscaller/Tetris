@@ -61,10 +61,8 @@ public class P1Tetris implements Type{
     
     fill(255,0,0);
     textSize(20);
-    text("Score: ",     25, height - 100);
-    text(score,         25, height - 80);
-    text("Attack: "  + lineSends, 25, height - 60);
-    text("Lines: "  + totalLines, 25, height - 40);
+    text("Attack: "  + lineSends, 35, height - 60);
+    text("Lines: "  + totalLines, 35, height - 40);
     
     for(int i = 0; i<8;++i){
       blocks[i] =  loadImage("Assets/" + i + ".png");
@@ -161,14 +159,10 @@ public class P1Tetris implements Type{
       //score
       fill(255,0,0);
       textSize(20);
-      text("Score: ", 60, height-100);
-      textAlign(RIGHT);
-      text(score,    115, height - 80);
-      textAlign(LEFT);
-      text("Attack: "  + lineSends, 25, height - 60);
-      text("Lines: "  + totalLines, 25, height - 40);
+      text("Attack: "  + lineSends, 35, height - 60);
+      text("Lines: "  + totalLines, 35, height - 40);
       if (combo > 0) // if you get a combo, it will show.
-      text("Combo: "   + combo,     25, height - 20);
+      text("Combo: "   + combo,     35, height - 20);
       
 
       

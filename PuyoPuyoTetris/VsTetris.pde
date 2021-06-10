@@ -21,8 +21,11 @@ public class VsTetris implements Type{
     P2.initialize();
   }
   public void go(){
+    pushMatrix();
+    translate(-25,0);
     P1.go();
     P2.go();
+    popMatrix();
   }
   public boolean getActive(){
     return P1.getActive() && P2.getActive();
