@@ -62,10 +62,9 @@ public class PuyoPuyo implements Type{
     }
     
     queue = new Puyo_Queue();
-    puyo = new Puyo(queue.nextPiece(),board);
-    
-    
-  }
+    puyo = new Puyo(queue.nextPiece(),board);  
+  
+}
   
   public boolean getActive() {
     return active;

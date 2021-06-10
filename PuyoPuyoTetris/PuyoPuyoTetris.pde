@@ -1,11 +1,12 @@
 boolean ongoing = false;
 Type game;
 PImage Board;
+int len = 1080;
 
 void setup(){  
-  size(1080,720);
-  background(255);
   Board = loadImage("Assets/MainMenu.png");
+  
+  size(1080,720);
   
   PImage[][] Puyos = Constants.Puyos; //load 80 puyos into memory
   for(int i = 1; i <6 ; i++){
@@ -69,14 +70,18 @@ void mousePressed() {
         game = new PuyoPuyo();
         game.initialize();
         }
+        
         else if(x2Intercept > 692 && mouseX < 1016){ // Red
         System.out.println("red");
         }
+        
       }
       
       else if(yIntercept > 424 && yIntercept  < 676 && mouseX > 40 && x1Intercept < 365){//Purple Button
         
-        System.out.println("Purple " + mouseX + " " + mouseY);
+        ongoing = true;
+        game = new VsTetris();
+        game.initialize();
         
       }
       

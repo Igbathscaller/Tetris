@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Tetris implements Type{
+public class P1Tetris implements Type{
   
   private boolean active = true;
 
@@ -43,28 +43,28 @@ public class Tetris implements Type{
   
   
   
-  Tetris(){
+  P1Tetris(){
     noStroke();
     colorMode(HSB);
   }
   
   public void initialize(){
-    background(255);
     stroke(#2de0da);
     strokeWeight(4);
     fill(0);
-    rect(552,50,110,300);
-    rect(147,80,100,100);
+    rect(452,50,110,300);
+    rect(47,80,100,100);
     strokeWeight(1);
     noStroke();
     fill(255);
-    rect(250,50,300,600);
+    rect(150,50,300,600);
     
     fill(255,0,0);
     textSize(20);
-    text("Score: "   + score,     width - 335, height - 80);
-    text("Attack: "  + lineSends, width - 335, height - 60);
-    text("Total Lines: "  + totalLines, width - 335, height - 40);
+    text("Score: ",     25, height - 100);
+    text(score,         25, height - 80);
+    text("Attack: "  + lineSends, 25, height - 60);
+    text("Lines: "  + totalLines, 25, height - 40);
     
     for(int i = 0; i<8;++i){
       blocks[i] =  loadImage("Assets/" + i + ".png");
@@ -76,8 +76,7 @@ public class Tetris implements Type{
     
     queue = new Queue();
     piece = new Piece(queue.nextPiece(),board);
-    shadowPiece = piece.shadowPiece(0,0);
-        
+    shadowPiece = piece.shadowPiece(0,0);    
   }
   
   public boolean getActive() {
@@ -91,13 +90,13 @@ public class Tetris implements Type{
         
         int k = board[y][x];
         
-        image(blocks[k], x*30+250, 30*y-550);        
+        image(blocks[k], x*30+150, 30*y-550);        
         
   }
   
   private void block(int x, int y, int p){
         
-        image(blocks[p], x*30+250, 30*y-550);        
+        image(blocks[p], x*30+150, 30*y-550);        
         
   }
   
@@ -157,16 +156,19 @@ public class Tetris implements Type{
       
       //score reset
       fill(255);
-      rect(width - 350,height - 100,200,100);
+      rect(25,height - 120,125,100);
      
       //score
       fill(255,0,0);
       textSize(20);
-      text("Score: "   + score,     width - 335, height - 80);
-      text("Attack: "  + lineSends, width - 335, height - 60);
-      text("Total Lines: "  + totalLines, width - 335, height - 40);
+      text("Score: ", 60, height-100);
+      textAlign(RIGHT);
+      text(score,    115, height - 80);
+      textAlign(LEFT);
+      text("Attack: "  + lineSends, 25, height - 60);
+      text("Lines: "  + totalLines, 25, height - 40);
       if (combo > 0) // if you get a combo, it will show.
-      text("Combo: "   + combo,     width - 335, height - 20);
+      text("Combo: "   + combo,     25, height - 20);
       
 
       
@@ -188,7 +190,7 @@ public class Tetris implements Type{
     
     fill (255);
     noStroke();
-    rect(250, 0, 300, 150);
+    rect(150, 0, 300, 150);
     
      //renders board
      for(int i = 0; i<10; ++i){
@@ -256,7 +258,7 @@ public class Tetris implements Type{
        if(!canHold){
          tint(120);//greys out hold piece
        }
-       image(previews[hold],158,105);
+       image(previews[hold],58,105);
        noTint();
      }
      
@@ -264,7 +266,7 @@ public class Tetris implements Type{
      //renders preview
      for(int i = 0; i<5; ++i){
        int k = queue.getPiece(i);
-       image(previews[k], 568, 70+55*i);
+       image(previews[k], 468, 70+55*i);
      }
      
   }
