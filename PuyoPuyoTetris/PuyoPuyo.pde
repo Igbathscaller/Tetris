@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class PuyoPuyo implements Type{
   
   private boolean active = true;

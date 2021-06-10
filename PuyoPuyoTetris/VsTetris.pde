@@ -29,6 +29,8 @@ public class VsTetris implements Type{
     translate(-25,0);
     P1.go();
     P2.go();
+    P1.interact(P2);
+    P2.interact(P1);
     popMatrix();
   }
   

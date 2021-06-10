@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayDeque;
 
 public class P2Tetris implements Comp{
   
@@ -18,7 +18,7 @@ public class P2Tetris implements Comp{
   private int hold = 0;
   private boolean canHold = true;
   
-  private PImage[] blocks = new PImage[8];//image of blocks
+  private PImage[] blocks = new PImage[9];//image of blocks
   private int shadowPiece; //shadow piece only needs mark height 
   
   private PImage[] previews = new PImage[8];
@@ -41,7 +41,10 @@ public class P2Tetris implements Comp{
   private int totalLines = 0; //total lines Cleared
   private boolean BTB = false; //Back To Back (if last clear was a impressive one (TSPIN/TETRIS))
   
-  
+  public int trade;//information from previous player
+  public Deque<Integer> attack = new ArrayDeque();
+  public int danger = 0;
+
   
   P2Tetris(){
     noStroke();
@@ -64,7 +67,7 @@ public class P2Tetris implements Comp{
     text("Attack: "  + lineSends, 575, height - 60);
     text("Lines: "  + totalLines, 575, height - 40);
     
-    for(int i = 0; i<8;++i){
+    for(int i = 0; i<9;++i){
       blocks[i] =  loadImage("Assets/" + i + ".png");
     }
     
@@ -147,11 +150,16 @@ public class P2Tetris implements Comp{
         
       if (linesCleared>0){ //Calculate Lines send
         lineSends += ClearEffect.linesSend(linesCleared,combo);
+        trade = ClearEffect.linesSend(linesCleared,combo);
         if (BTB && linesCleared == 4){
         ++lineSends;
+        ++trade;
         }
         BTB = linesCleared == 4;
       }
+      
+      if (attack.size()>0)
+      attack();
       
       //score reset
       fill(255);
@@ -181,7 +189,27 @@ public class P2Tetris implements Comp{
 
   }
   
+  public void attack(){
+      
+      int atk = attack.remove();
+      System.out.println(atk + "p2");
+      for(int l = atk; l<40; ++l){
+          board[l-atk] = board[l];
+      }
+      
+      int cheese = (int)(10*Math.random());
+      
+      for(int r = 0; r<atk; ++r){
+        board[39-r] = new int[10];
+        Arrays.fill(board[39-r], 8);
+        board[39-r][cheese] = 0;
+      }
+    
+  }
+  
   public void go(){
+    
+    trade = 0;
     
     fill (255);
     noStroke();
@@ -397,9 +425,20 @@ public class P2Tetris implements Comp{
     }
   }
   
-  public void interact(Comp p1){
-    
-    
+  public void interact(Comp p2){//p2 is other
+    if (p2.getTrade() > 0){
+      
+      if (attack.size() == 0){
+        attack.add(0);
+      }
+      
+      attack.add(p2.getTrade());
+      danger += p2.getTrade();
+    }
+  }
+  
+  public int getTrade(){
+    return trade;
   }
 
 

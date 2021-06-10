@@ -7,5 +7,7 @@ public interface Comp{
   public void interact(Comp game);
   public void go();
   public boolean getActive();
+  public int getTrade();
+  
   
 }
