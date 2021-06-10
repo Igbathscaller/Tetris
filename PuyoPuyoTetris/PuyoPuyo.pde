@@ -1,3 +1,4 @@
+
 public class PuyoPuyo implements Type{
   
   private boolean active = true;
@@ -32,6 +33,9 @@ public class PuyoPuyo implements Type{
   private boolean[]keyclick = new boolean[5];
   
   private int score = 0;
+  
+  private int animationTimer = 0; 
+  private ArrayList<Integer> animations = new ArrayList();
   
   
   
@@ -75,7 +79,6 @@ public class PuyoPuyo implements Type{
   private void block(int x, int y, int p){
         
         if(p>0){//     color  position  
-          System.out.println(p);
           image(puyoImg[p/16][p&15], x*48+250, 48*y);
         }
         
@@ -84,24 +87,22 @@ public class PuyoPuyo implements Type{
   //saves piece on board && and clears lines
   private void setPiece(){
       
+      animationTimer=16;
+      
       coords = puyo.getPosition();
       
       puyos = puyo.getPiece();
       
       //save puyo
-      trigger(coords[0],coords[1],puyos[0]);
-      
-      trigger(coords[2],coords[3],puyos[1]);
-      
-          
-      //score reset
-      fill(255);
-      rect(width - 350,height - 75,200,50);
-     
-      //score
-      fill(255,0,0);
-      text("Score: " + score, width - 335, height - 50);
-      
+      animations = new ArrayList();
+      if (coords[1] >= coords[3]){
+      fall(coords[0],coords[1],puyos[0]);
+      fall(coords[2],coords[3],puyos[1]);      
+      }
+      else{
+      fall(coords[2],coords[3],puyos[1]);
+      fall(coords[0],coords[1],puyos[0]);      
+      }
       
       //spawns new puyo and moves down queue
       puyo = new Puyo(queue.nextPiece(),board);
@@ -116,89 +117,178 @@ public class PuyoPuyo implements Type{
 
   }
   
+  private void fall(int x, int y, int p){
+    
+    rect(x*48+250, 48*y,48,48);
+    while(y<13 && board[x][y+1] == 0){
+      ++y;
+    }
+    trigger(x,y,p);
+    
+    
+  }
+  
   //triggers nearby puyos. Making them connect.
   private void trigger(int x, int y, int p){
     
+    boolean flash = false;
+    
     board[ x ][ y ] = p*16;
+    
+    animations.add(x);
+    animations.add(y);
+    animations.add(p*16);
     
     //connect same color
     if( x + 1< 6  && board[x+1][y]>>4 == p){
+      
+      triggerChain(x+1,y,p);      
       board[x][y] += 4;
       board[x+1][y] += 8;
+      flash = true;
     }
     if( x - 1>= 0  && board[x-1][y]>>4 == p){
+      triggerChain(x-1,y,p);      
       board[x][y] += 8;
       board[x-1][y] += 4;
+      flash = true;
     }
-    if( y + 1< 14 && board[x][y+1]>>4 == p){
+    if( y + 1< 14 && board[x][y+1]>>4 == p){      
+      triggerChain(x,y+1,p);
       board[x][y] += 1;
       board[x][y+1] += 2;
+      flash = true;
     }
-    if( y - 1<= 0  && board[x][y-1]>>4 == p){
+    if( y - 1>= 0  && board[x][y-1]>>4 == p){
+      triggerChain(x,y-1,p);
       board[x][y] += 2;
-      board[x][y-1] += 1;
+      board[x][y-1] += 1;      
+      flash = true;
     }
     
+    if(!flash){
+      animations.remove(animations.size()-1);
+      animations.remove(animations.size()-1);
+      animations.remove(animations.size()-1);
+    }
+    
+  }
+  
+  public void triggerChain(int x, int y, int p){
+    
+    boolean newPuyo = true;
+    for(int i = 0; i<animations.size() && newPuyo; i+=3){ 
+      newPuyo = x != animations.get(i) || y != animations.get(i+1);
+    }
+    
+    if (newPuyo){
+      
+      animations.add(x);
+      animations.add(y);
+      animations.add(board[x][y]);
+    
+    //connect same color
+    if( (board[x][y] & 4) == 4){
+      
+      triggerChain(x+1,y,p);
+      
+    }
+    if( (board[x][y] & 8) == 8){
+      
+      triggerChain(x-1,y,p);
+      
+    }
+    if( (board[x][y] & 1) == 1){
+      triggerChain(x,y+1,p);
+      
+    }
+    if( (board[x][y] & 2) == 2){
+      triggerChain(x,y-1,p);      
+      
+    }
+      
+    }
+      
+      
   }
   
   
   public void go(){
     
-    fill (255);
-    noStroke();
-    rect(250, 0, 300, 675);
+    if(animationTimer==0){
+      
+      fill (255);
+      noStroke();
+      rect(250, 0, 300, 675);
+      
+       //renders board
+       for(int i = 0; i<6; ++i){
+         for(int j = 0; j<14; ++j){
+           block(i,j,board[i][j]);
+         }
+       }       
+       
+       //renders Left/Right
+       if(keyheld[0] > 0 && ++keyheld[0] > 10){
+          if(puyo.checkNext(-1,0)){
+             puyo.setPosition(-1,0);
+            }
+       }
+       if(keyheld[1] > 0 && ++keyheld[1] > 10){
+            if(puyo.checkNext(1,0)){
+              puyo.setPosition(1,0);
+            }
+       }
+       
     
-     //renders board
-     for(int i = 0; i<6; ++i){
-       for(int j = 0; j<14; ++j){
-         block(i,j,board[i][j]);
+       
+       //renders tentative puyo
+       puyos = puyo.getPiece();
+       coords = puyo.getPosition();
+       block(coords[0], coords[1], puyos[0]*16);
+       block(coords[2], coords[3], puyos[1]*16);
+            
+       //renders preview
+         for(int i = 0; i<2; ++i){
+         int k = queue.getPiece(i);
+         image(previews[k%5], 568, 70+110*i);
+         image(previews[k/5], 568, 115+110*i);
        }
-     }
-     
-     //gravity
-     if( time > 5040 && puyo.checkNext(0,1)){
-       time = 0;
-       puyo.setPosition(0,1);
+       
+       //gravity
+       if( time > 5040 && puyo.checkNext(0,1)){
+         time = 0;
+         puyo.setPosition(0,1);
+         }
+       else if(time < 5040 && keyclick[4]){//soft drop
+         time += speed*20;
        }
-     else if(time < 5040 && keyclick[4]){//soft drop
-       time += speed*20;
-     }
-     else if(time > 10000){
-        //save puyo
-        setPiece();
-        time = 0;
-     }     
-     else{
-       time += speed;
-     }
-     
-     
-     //renders Left/Right
-     if(keyheld[0] > 0 && ++keyheld[0] > 10){
-        if(puyo.checkNext(-1,0)){
-           puyo.setPosition(-1,0);
-          }
-     }
-     if(keyheld[1] > 0 && ++keyheld[1] > 10){
-          if(puyo.checkNext(1,0)){
-            puyo.setPosition(1,0);
-          }
-     }
-     
+       else if(time > 8000){
+          //save puyo
+          setPiece();
+          time = 0;
+       }     
+       else{
+         time += speed;
+       }
 
-     
-     //renders tentative puyo
-     puyos = puyo.getPiece();
-     coords = puyo.getPosition();
-     block(coords[0], coords[1], puyos[0]*16);
-     block(coords[2], coords[3], puyos[1]*16);
-          
-     //renders preview
-       for(int i = 0; i<2; ++i){
-       int k = queue.getPiece(i);
-       image(previews[k%5], 568, 70+110*i);
-       image(previews[k/5], 568, 115+110*i);
-     }
+       
+    }
+    
+    else{
+      if ((animationTimer&3)==0){
+        for(int i = 0; i<animations.size(); i+=3){ 
+        block(animations.get(i), animations.get(i+1), animations.get(i+2));
+        }
+      }
+      else if((animationTimer&3)==1){
+        fill(255);
+        for(int i = 0; i<animations.size(); i+=3){ 
+        rect(animations.get(i)*48+250, 48*animations.get(i+1),48,48);
+        }
+      }
+      --animationTimer;
+    }
      
   }
   
@@ -209,59 +299,62 @@ public class PuyoPuyo implements Type{
   
   public void keypress(int c){
     
-    switch(c){
-      
-      
-      case 38://up
-        if(!keyclick[1]){
-          boolean spin = false;
-          for(int kick = 0; !spin && kick<2; ++kick){
-             spin = puyo.checkClockwise(kick);
-          }
-          if(spin){
-            puyo.setRotate(true);
-          }
-          keyclick[1] = true;
-        }
-        break;
-      
-      case 90://z
-        if(!keyclick[2]){
-          boolean spin = false;
-          for(int kick = 0; !spin && kick<2; ++kick){
-             spin = puyo.checkCClockwise(kick);
-          }
-          if(spin){
-            puyo.setRotate(false);
-          }
-          keyclick[2] = true;
-        }
-        break;
-      
-                
-      case 40://down
-        keyclick[4] = true;
-        break;
-      
+    if (animationTimer == 0){
+    
+      switch(c){
         
-      case 37://left
-        if(keyheld[0] == 0){
-          if(puyo.checkNext(-1,0)){
-            puyo.setPosition(-1,0);
-          }
-          ++keyheld[0];
-        }
-        break;
         
-      case 39://right
-        if(keyheld[1] == 0){
-          if(puyo.checkNext(1,0)){
-            puyo.setPosition(1,0);
+        case 38://up
+          if(!keyclick[1]){
+            boolean spin = false;
+            for(int kick = 0; !spin && kick<2; ++kick){
+               spin = puyo.checkClockwise(kick);
+            }
+            if(spin){
+              puyo.setRotate(true);
+            }
+            keyclick[1] = true;
           }
-          ++keyheld[1];
-        }
-        break;    
-
+          break;
+        
+        case 90://z
+          if(!keyclick[2]){
+            boolean spin = false;
+            for(int kick = 0; !spin && kick<2; ++kick){
+               spin = puyo.checkCClockwise(kick);
+            }
+            if(spin){
+              puyo.setRotate(false);
+            }
+            keyclick[2] = true;
+          }
+          break;
+        
+                  
+        case 40://down
+          keyclick[4] = true;
+          break;
+        
+          
+        case 37://left
+          if(keyheld[0] == 0){
+            if(puyo.checkNext(-1,0)){
+              puyo.setPosition(-1,0);
+            }
+            ++keyheld[0];
+          }
+          break;
+          
+        case 39://right
+          if(keyheld[1] == 0){
+            if(puyo.checkNext(1,0)){
+              puyo.setPosition(1,0);
+            }
+            ++keyheld[1];
+          }
+          break;    
+  
+      }
     }
   }
   
