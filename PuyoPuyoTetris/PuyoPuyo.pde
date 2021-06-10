@@ -37,6 +37,8 @@ public class PuyoPuyo implements Type{
   private int animationTimer = 0; 
   private ArrayList<Integer> animations = new ArrayList();
   
+  private int PuyoChain1 = 0;
+  private int PuyoChain2 = 0;
   
   
   PuyoPuyo(){
@@ -94,16 +96,21 @@ public class PuyoPuyo implements Type{
       puyos = puyo.getPiece();
       
       //save puyo
-      animations = new ArrayList();
+      animations.clear();
       if (coords[1] >= coords[3]){
-      fall(coords[0],coords[1],puyos[0]);
-      fall(coords[2],coords[3],puyos[1]);      
+      fall(coords[0],coords[1],puyos[0]);//lower puyo first
+      PuyoChain1 = animations.size();    //length of chain * 3
+      fall(coords[2],coords[3],puyos[1]);//higher puyo
+      PuyoChain2 = animations.size() - PuyoChain1;//length of total piece - first chain
       }
+    
       else{
       fall(coords[2],coords[3],puyos[1]);
-      fall(coords[0],coords[1],puyos[0]);      
+      PuyoChain1 = animations.size();
+      fall(coords[0],coords[1],puyos[0]);
+      PuyoChain2 = animations.size() - PuyoChain1;
       }
-      
+            
       //spawns new puyo and moves down queue
       puyo = new Puyo(queue.nextPiece(),board);
       
@@ -212,6 +219,26 @@ public class PuyoPuyo implements Type{
       
   }
   
+  public void clearPuyos(){
+    
+    if (puyos[0] == puyos[1] && PuyoChain1+PuyoChain2 >=12){
+        for(int i = 0; i<animations.size(); i+=3){ 
+          board[animations.get(i)][animations.get(i+1)]=0;
+        }
+    }
+    else if(PuyoChain1 >= 12){
+      for(int i = 0; i<PuyoChain1; i+=3){
+        board[animations.get(i)][animations.get(i+1)]=0;
+      }
+    }
+    else if(PuyoChain2 >= 12){
+      for(int i = PuyoChain1; i<PuyoChain1+PuyoChain2; i+=3){
+        board[animations.get(i)][animations.get(i+1)]=0;
+      }
+    }
+    
+  }
+  
   
   public void go(){
     
@@ -281,13 +308,17 @@ public class PuyoPuyo implements Type{
         block(animations.get(i), animations.get(i+1), animations.get(i+2));
         }
       }
-      else if((animationTimer&3)==1){
+      else if((animationTimer&3)==2){
         fill(255);
         for(int i = 0; i<animations.size(); i+=3){ 
         rect(animations.get(i)*48+250, 48*animations.get(i+1),48,48);
         }
       }
+      
       --animationTimer;
+      if(animationTimer == 0){
+        clearPuyos();
+      }
     }
      
   }
