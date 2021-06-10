@@ -158,11 +158,17 @@ public class P1Tetris implements Comp{
         BTB = linesCleared == 4;
       }
       
-      if (attack.size()>0){
+      
+      
+      if (attack.size()>0 && linesCleared > 0){
+        counter();
+      }
+      else if(attack.size()>0 && linesCleared == 0){
         attack();
       }
       
       //score reset
+      noStroke();
       fill(255);
       rect(25,height - 120,125,100);
      
@@ -188,21 +194,70 @@ public class P1Tetris implements Comp{
 
   }
   
+  public void counter(){
+    int atk=0;
+    
+    if (danger > trade){
+      danger-=trade;
+    }
+    else{
+      danger = 0;
+    }
+    
+    if (trade>0){
+      while(attack.size()>0 && trade >= (atk=attack.remove()) ){
+          trade -= atk;
+          atk = 0;
+      }
+      attack.addFirst(atk);
+      
+    }
+  }
+  
   public void attack(){
+      int strike = 8; //max line sends per turn.
       
-      int atk = attack.remove();
-      System.out.println(atk + "p1");
-      for(int l = atk; l<40; ++l){
-          board[l-atk] = board[l];
+      if(danger>strike){
+        danger -= strike;
+      }
+      else{
+        danger = 0;
       }
       
-      int cheese = (int)(10*Math.random());
+      int atk = 0;
       
-      for(int r = 0; r<atk; ++r){
-        board[39-r] = new int[10];
-        Arrays.fill(board[39-r], 8);
-        board[39-r][cheese] = 0;
+      while(attack.size()>0 && strike>=( atk=attack.remove() ) ){//counts small attacks
+        for(int l = atk; l<40; ++l){
+            board[l-atk] = board[l];
+        }
+        
+        int cheese = (int)(10*Math.random());
+        
+        for(int r = 0; r<atk; ++r){
+          board[39-r] = new int[10];
+          Arrays.fill(board[39-r], 8);
+          board[39-r][cheese] = 0;
+        }
+        atk = 0;
       }
+      
+      if (atk>strike){
+        attack.addFirst(atk-strike);//add the attack 
+        
+        //commit the left over strike.
+        for(int l = strike; l<40; ++l){
+              board[l-strike] = board[l];
+          }
+          
+          int cheese = (int)(10*Math.random());
+          
+          for(int r = 0; r<strike; ++r){
+            board[39-r] = new int[10];
+            Arrays.fill(board[39-r], 8);
+            board[39-r][cheese] = 0;
+        }
+      }
+      
     
   }
   
@@ -228,6 +283,12 @@ public class P1Tetris implements Comp{
          }
        }
      }
+     
+     strokeWeight(2);
+     stroke(255);
+     line(150,650,150,200);
+     stroke(0,255,255);
+     line(150,650,150, 650-30*Math.min(danger,15));
      
      //gravity
      if( time > 5040 && piece.checkNext(0,1)){
@@ -427,11 +488,7 @@ public class P1Tetris implements Comp{
   
   public void interact(Comp p2){//p2 is other.
     if (p2.getTrade() > 0){
-      
-      if (attack.size() == 0){
-        attack.add(0);
-      }
-      
+            
       attack.add(p2.getTrade());
       danger += p2.getTrade();
     }
