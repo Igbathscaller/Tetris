@@ -81,7 +81,7 @@ Space: This will instantly drop a piece
 
 **6/10/2021**
 - 2 Player Tetris have two concurrent tetris games.
-- Now They have seperate KeyBinds
+- They have seperate KeyBinds
 
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
