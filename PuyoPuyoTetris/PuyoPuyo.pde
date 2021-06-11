@@ -6,6 +6,8 @@ public class PuyoPuyo implements Type{
   // 1:purple, 2:yellow, 3:blue, 4:green, 5:red
   
   private int[][] board = new int[6][14];    //6 by 14. x by y (each coloumn has its own gravity)
+  private int[][] tempBoard;
+  
   
   private Puyo_Queue queue;
   
@@ -39,7 +41,11 @@ public class PuyoPuyo implements Type{
   
   private int PuyoChain1 = 0;
   private int PuyoChain2 = 0;
+ 
   private boolean PuyoConnected = false;// if Chain 1 and Chain 2 are connected.
+  
+  private boolean puyoClear1 = false;
+  private boolean puyoClear2 = false;
   
   
   PuyoPuyo(){
@@ -188,7 +194,7 @@ public class PuyoPuyo implements Type{
     }
     
   }
-  
+    
   public void triggerChain(int x, int y, int p){
     
     boolean newPuyo = true;
@@ -230,22 +236,46 @@ public class PuyoPuyo implements Type{
   
   public void clearPuyos(){
     
+    puyoClear1 = false;
+    puyoClear2 = false;
+    
     if (puyos[0] == puyos[1] && PuyoConnected && PuyoChain1+PuyoChain2 >=12){
         for(int i = 0; i<animations.size(); i+=3){ 
           board[animations.get(i)][animations.get(i+1)]=0;
         }
+        puyoClear1 = true;
+        puyoClear2 = true;
     }
-    else if(PuyoChain1 >= 12){
-      for(int i = 0; i<PuyoChain1; i+=3){
-        board[animations.get(i)][animations.get(i+1)]=0;
+    else {
+      if(PuyoChain1 >= 12){
+        for(int i = 0; i<PuyoChain1; i+=3){
+          board[animations.get(i)][animations.get(i+1)]=0;
+        }
+        puyoClear1 = true;
       }
-    }
-    else if(PuyoChain2 >= 12){
-      for(int i = PuyoChain1; i<PuyoChain1+PuyoChain2; i+=3){
-        board[animations.get(i)][animations.get(i+1)]=0;
+      if(PuyoChain2 >= 12){
+        for(int i = PuyoChain1; i<PuyoChain1+PuyoChain2; i+=3){
+          board[animations.get(i)][animations.get(i+1)]=0;
+        }
+        puyoClear2 = true;
       }
     }
     
+    if (puyoClear1||puyoClear2){ // check gravity
+    
+      tempBoard = board;
+      board = new int[6][14];
+      
+      for(int i = 0; i<6; ++i){//each col
+        for(int j = 13; j>=0; --j){//each part of col starting from bottom.
+          if(tempBoard[i][j] > 15){
+            fall(i,j,tempBoard[i][j]>>4);
+          }
+        }
+      }
+      
+    }
+      
   }
   
   
