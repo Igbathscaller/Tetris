@@ -34,11 +34,13 @@ public class VsTetris implements Type{
     popMatrix();
     
     if (!P2.getActive()){
+      fill(0);
       textSize(50);
       text("YOU WIN",160,360);
       text("YOU LOSE",690,360); 
     }
     else if (!P1.getActive()){
+      fill(0);
       textSize(50);
       text("YOU WIN",690,360);
       text("YOU LOSE",160,360); 

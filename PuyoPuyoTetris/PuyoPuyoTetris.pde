@@ -84,11 +84,13 @@ void mousePressed() {
       else if(yIntercept > 460 && yIntercept < 610){//bottom right
         
         if(x1Intercept > 371 && x2Intercept < 675){
-          System.out.println("blue");
+          ongoing = true;
+          game = new PuyoWip();
+          game.initialize();
         }
         
         else if(x2Intercept > 686 && mouseX < 1016){//orange
-          System.out.println("orange");
+          System.out.println("README");
           link("https://github.com/Igbathscaller/APCSFinalProject/blob/main/README.md");
         }
         
@@ -109,7 +111,6 @@ void keyPressed() {
       background(255);
       initialize();
     }
-    System.out.println(keyCode);
   }
 
 void keyReleased() {
