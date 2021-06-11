@@ -65,7 +65,9 @@ void mousePressed() {
         }
         
         else if(x2Intercept > 692 && mouseX < 1016){ // Red
-        System.out.println("red");
+        ongoing = true;
+        game = new ScoreTetris();
+        game.initialize();
         }
         
       }
