@@ -89,32 +89,13 @@ void mousePressed() {
         
         else if(x2Intercept > 686 && mouseX < 1016){//orange
           System.out.println("orange");
+          link("https://github.com/Igbathscaller/APCSFinalProject/blob/main/README.md");
         }
         
         
       }
 
-      
-      
-      /*
-      if(100<mouseX && mouseX<205 && 300<mouseY && mouseY<340){
-        
-      }
-      
-      if(350<mouseX && mouseX<520 && 300<mouseY && mouseY<340){
-        ongoing = true;
-        game = new PuyoPuyo();
-        game.initialize();
-      }
-      
-      //if(250<mouseX && mouseX<400 && 450<mouseY && mouseY<490){
-      //  ongoing = true;
-      //  game = new DTCannon();
-      //  game.initialize();
-      //}
-      
-      */
-      
+           
    }
 }
    
