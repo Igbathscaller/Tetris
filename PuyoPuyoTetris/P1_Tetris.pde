@@ -148,8 +148,8 @@ public class P1Tetris implements Comp{
         combo = -1;
         
       if (linesCleared>0){ //Calculate Lines send
-        lineSends += ClearEffect.linesSend(linesCleared,combo);
-        trade = ClearEffect.linesSend(linesCleared,combo);
+        lineSends += ClearEffect.linesSend(linesCleared,combo,piece.getPiece(),coords,board);
+        trade = ClearEffect.linesSend(linesCleared,combo,piece.getPiece(),coords,board);
         
         if (BTB && linesCleared == 4){
         ++lineSends;
