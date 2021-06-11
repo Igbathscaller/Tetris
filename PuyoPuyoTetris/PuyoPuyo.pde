@@ -39,6 +39,7 @@ public class PuyoPuyo implements Type{
   
   private int PuyoChain1 = 0;
   private int PuyoChain2 = 0;
+  private boolean PuyoConnected = false;// if Chain 1 and Chain 2 are connected.
   
   
   PuyoPuyo(){
@@ -95,11 +96,15 @@ public class PuyoPuyo implements Type{
       
       puyos = puyo.getPiece();
       
+      PuyoChain1 = 0;
+      PuyoChain2 = 0;
+      
       //save puyo
       animations.clear();
       if (coords[1] >= coords[3]){
       fall(coords[0],coords[1],puyos[0]);//lower puyo first
       PuyoChain1 = animations.size();    //length of chain * 3
+      
       fall(coords[2],coords[3],puyos[1]);//higher puyo
       PuyoChain2 = animations.size() - PuyoChain1;//length of total piece - first chain
       }
@@ -107,6 +112,7 @@ public class PuyoPuyo implements Type{
       else{
       fall(coords[2],coords[3],puyos[1]);
       PuyoChain1 = animations.size();
+      
       fall(coords[0],coords[1],puyos[0]);
       PuyoChain2 = animations.size() - PuyoChain1;
       }
@@ -186,6 +192,7 @@ public class PuyoPuyo implements Type{
     boolean newPuyo = true;
     for(int i = 0; i<animations.size() && newPuyo; i+=3){ 
       newPuyo = x != animations.get(i) || y != animations.get(i+1);
+      PuyoConnected = PuyoConnected || (i<PuyoChain1 && !newPuyo);
     }
     
     if (newPuyo){
@@ -221,7 +228,7 @@ public class PuyoPuyo implements Type{
   
   public void clearPuyos(){
     
-    if (puyos[0] == puyos[1] && PuyoChain1+PuyoChain2 >=12){
+    if (puyos[0] == puyos[1] && PuyoConnected && PuyoChain1+PuyoChain2 >=12){
         for(int i = 0; i<animations.size(); i+=3){ 
           board[animations.get(i)][animations.get(i+1)]=0;
         }
