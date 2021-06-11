@@ -26,10 +26,16 @@ Up arrow key: Rotates the tetromino clockwise
 '.' key: Allows you to hold onto a tetromino. It cannot be used again until the piece moving after you hold is placed.  
 Shift: This will instantly drop a piece  
   
+**Tetris Score Battle**  
+The traditional Tetris where you can't hold pieces. Same controls as 2 Player Tetris except holding pieces won't work.  
+  
 **1 Player PuyoPuyo**  
 Left, right, down arrow keys: Move the blocks in their respective directions  
 Up arrow key: Rotates the tetromino  
-
+  
+**2 Player PuyoPuyo**  
+Work in progress  
+  
 ## Logs
 **5/21/2021**
 - Initialized files
@@ -104,6 +110,9 @@ Up arrow key: Rotates the tetromino
 - They have seperate KeyBinds
 - Sending Lines in 2P tetris has been complete. Tspins have not been designed yet.
 - Puyos now clear and fall when they are done. does not keep goin/combo after first clear.
+- New Menu look
+- Tetris Score Battle implemented
+- Help redirecting to Github
 
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
