@@ -83,6 +83,7 @@ Space: This will instantly drop a piece
 - 2 Player Tetris have two concurrent tetris games.
 - They have seperate KeyBinds
 - Sending Lines in 2P tetris has been complete. Tspins have not been designed yet.
+- Puyos now clear and fall when they are done. does not keep goin/combo after first clear.
 
 ## Design Document
 https://docs.google.com/document/d/1Mx8YY4uc_4GV24MiqMmHlqhwnB3wSif1kmcrsErQlR8/edit?usp=sharing
