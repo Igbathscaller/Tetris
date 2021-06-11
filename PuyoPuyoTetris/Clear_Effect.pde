@@ -19,16 +19,16 @@ public static class ClearEffect{
   public static boolean checkTspin(int[] coords, int[][] board){
     int corners = 0;
     //int 1corners = 0;
-    if((coords[0]+1 < 10 && coords[1]+1 < 40) || (board[coords[0]+1][coords[1]+1]>0) ){//1,1
+    if(!(coords[0]+1 < 10 && coords[1]+1 < 40) || (board[coords[0]+1][coords[1]+1]>0) ){//1,1
       corners ++;
     }
-    if((coords[0]-1 >= 0 && coords[1]+1 < 40) || (board[coords[0]-1][coords[1]+1]>0) ){//-1,1
+    if(!(coords[0]-1 >= 0 && coords[1]+1 < 40) || (board[coords[0]-1][coords[1]+1]>0) ){//-1,1
       corners ++;
     }
-    if((coords[0]+1 < 10 && coords[1]-1 >= 0) || (board[coords[0]+1][coords[1]-1]>0) ){//-1,1
+    if(!(coords[0]+1 < 10 && coords[1]-1 >= 0) || (board[coords[0]+1][coords[1]-1]>0) ){//-1,1
       corners ++;
     }
-    if((coords[0]-1 >= 0 && coords[1]-1 >= 0) || (board[coords[0]-1][coords[1]-1]>0) ){//-1,-1
+    if(!(coords[0]-1 >= 0 && coords[1]-1 >= 0) || (board[coords[0]-1][coords[1]-1]>0) ){//-1,-1
       corners ++;
     } 
     return corners >=3;
