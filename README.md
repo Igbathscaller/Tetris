@@ -4,11 +4,27 @@ Compile/run via Processing
 ## How to Play
 Once you are on the main screen, you should see two buttons: Tetris and Puyo Puyo. Clickng on them will bring you to their respective games.  
 Hitting Backspace on the Tetris or Puyo Puyo games will bring you back to the main screen.  
-**Tetris**  
+**1 Player Tetris**  
 Left, right, down arrow keys: Move the tetromino in their respective directions  
 Up arrow key: Rotates the tetromino  
-'C' key: Allows you to hold onto a tetromino. It cannot be used again until the piece moving after you hold is placed.  
+'c' key: Allows you to hold onto a tetromino. It cannot be used again until the piece moving after you hold is placed.  
 Space: This will instantly drop a piece  
+**2 Player Tetris**  
+*Left Player*  
+'d', 'g', 'f' keys: Move the tetromino left, right, and down respectively  
+'r' key: Rotates the tetromino clockwise  
+'z' key: Rotates the tetromino counterclockwise  
+'x' key: Allows you to hold onto a tetromino. It cannot be used again until the piece moving after you hold is placed.  
+Space: This will instantly drop a piece  
+*Right Player*  
+Left, right, down arrow keys: Move the tetromino in their respective directions  
+Up arrow key: Rotates the tetromino clockwise  
+',' key: Rotates the tetromino counterclockwise  
+'.' key: Allows you to hold onto a tetromino. It cannot be used again until the piece moving after you hold is placed.  
+Shift: This will instantly drop a piece  
+**1 Player PuyoPuyo**  
+Left, right, down arrow keys: Move the blocks in their respective directions  
+Up arrow key: Rotates the tetromino  
 
 ## Logs
 **5/21/2021**
