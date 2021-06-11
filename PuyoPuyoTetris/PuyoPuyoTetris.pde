@@ -25,8 +25,6 @@ void initialize(){
   noFill();
   fill(0);
   textSize(30);
-  text("TETRIS",105,330);
-  text("PUYOPUYO",355,330);
 }
 
 void draw() {
@@ -39,12 +37,7 @@ void draw() {
   }
   
   noStroke();
-  fill(255);
-  rect(880,0,200,20);
-  fill(0);
-  textSize(20);
-  text("FPS: "+frameRate,880,20);
-  
+  fill(255);  
 }
 
 

@@ -51,8 +51,8 @@ public class PuyoPuyo implements Type{
     background(255);
     stroke(#2de0da);
     strokeWeight(4);
-    fill(0);
-    rect(552,50,110,300);
+    fill(255);
+    rect(552,50,80,250);
 //  rect(147,80,100,100);
     strokeWeight(4);
     stroke(0);
@@ -132,6 +132,8 @@ public class PuyoPuyo implements Type{
   
   private void fall(int x, int y, int p){
     
+    noStroke();
+    fill(255);
     rect(x*48+250, 48*y,48,48);
     while(y<13 && board[x][y+1] == 0){
       ++y;
@@ -252,8 +254,9 @@ public class PuyoPuyo implements Type{
     if(animationTimer==0){
       
       fill (255);
-      noStroke();
-      rect(250, 0, 300, 675);
+      stroke(#2de0da);
+      strokeWeight(2);
+      rect(249, -2, 302, 678);
       
        //renders board
        for(int i = 0; i<6; ++i){
@@ -316,6 +319,7 @@ public class PuyoPuyo implements Type{
         }
       }
       else if((animationTimer&3)==2){
+        noStroke();
         fill(255);
         for(int i = 0; i<animations.size(); i+=3){ 
         rect(animations.get(i)*48+250, 48*animations.get(i+1),48,48);
