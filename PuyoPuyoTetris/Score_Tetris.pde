@@ -31,14 +31,18 @@ public class ScoreTetris implements Type{
   public void go(){
     pushMatrix();
     translate(-140,0);
-    P1.go();
+    if (P1.getActive()){
+      P1.go();
+    }
     translate(540,0);
-    P2.go();
+    if (P2.getActive()){
+      P2.go();
+    }
     popMatrix();
   }
   
   public boolean getActive(){
-    return P1.getActive() && P2.getActive();
+    return P1.getActive() || P2.getActive();
   }
   
   

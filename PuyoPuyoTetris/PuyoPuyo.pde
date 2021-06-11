@@ -130,9 +130,7 @@ public class PuyoPuyo implements Type{
       //game over
       if(!puyo.checkNext(0,0)) {
         active = false;
-        System.out.println("GG");
       }
-      
 
   }
   

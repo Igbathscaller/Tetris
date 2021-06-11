@@ -149,7 +149,19 @@ public class P1Score implements Comp{
       //game over
       if(!piece.checkNext(0,0)) {
         active = false;
-        System.out.println("GG");
+      //renders board
+       for(int i = 0; i<10; ++i){
+         for(int j = 20; j<40; ++j){
+           block(i,j);
+         }
+       }
+       for(int i = 0; i<10; ++i){
+         for(int j = 18; j<20; ++j){
+           if (board[j][i] != 0) {
+             block(i,j);
+           }
+         }
+       }
       }
 
   }

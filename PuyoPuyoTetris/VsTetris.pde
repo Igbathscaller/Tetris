@@ -32,6 +32,18 @@ public class VsTetris implements Type{
     P1.interact(P2);
     P2.interact(P1);
     popMatrix();
+    
+    if (!P2.getActive()){
+      textSize(50);
+      text("YOU WIN",160,360);
+      text("YOU LOSE",690,360); 
+    }
+    else if (!P1.getActive()){
+      textSize(50);
+      text("YOU WIN",690,360);
+      text("YOU LOSE",160,360); 
+    }
+    
   }
   
   public boolean getActive(){
